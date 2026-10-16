@@ -219,14 +219,55 @@
                 width: 100%;
             }
         }
+
+        #controls #backBtn {
+            width: auto;
+            flex-shrink: 1;
+            background: #0f172a;
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .floor-nav-bar {
+            display: inline-flex;
+            gap: 3px;
+            background: #e2e8f0;
+            padding: 3px;
+            border-radius: 8px;
+        }
+
+        .floor-nav-bar a {
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: #334155;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .floor-nav-bar a.active,
+        .floor-nav-bar a:hover {
+            background: var(--accent);
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Floor 2</h1>
+        <h1>Floor 2 Map</h1>
         <div id="controls">
-            <button id="backBtn" title="Go back">Back to Events</button>
+            <nav class="floor-nav-bar">
+                <a href="Ground.html">Ground</a>
+                <a href="one.html">Floor 1</a>
+                <a href="two.html" class="active">Floor 2</a>
+                <a href="three.html">Floor 3</a>
+            </nav>
+            <button id="backBtn" title="Go to all events">📋 Events</button>
         </div>
     </header>
 
