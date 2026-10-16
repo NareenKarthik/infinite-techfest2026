@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="rpsit.png">
+  <title>ECE — Event Venue Roadmap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #00337a;
+      --primary-light: #e3f2fd;
+      --ece-accent: #f59e0b;
+      --accent: #ff5252;
+      --success: #10b981;
+      --bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #004aad 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0, 74, 173, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Venue Summary Banner */
+    .summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-left: 6px solid #f59e0b;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      background: #fef3c7;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b45309;
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-info p {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Events Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0, 74, 173, 0.15);
+      border-color: #f59e0b;
+    }
+
+    .event-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .badge-floor2 {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .badge-floor4 {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .badge-ground {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .event-card h3 {
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .event-venue {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .event-btn-action {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.25s;
+      display: block;
+    }
+
+    .event-btn-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Roadmap Wayfinding Section */
+    .roadmap-section {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      border-left: 5px solid #f59e0b;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.25s;
+    }
+
+    .tab-btn.active {
+      background: #004aad;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Steps */
+    .route-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #edf2f7;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #004aad;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-text h4 {
+      font-size: 14px;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .audio-speech-btn {
+      background: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      transition: background 0.25s;
+    }
+
+    .audio-speech-btn:hover {
+      background: #00337a;
+    }
+
+    .visual-map-container {
+      background: #eef4fb;
+      border: 2px solid #bcd7ee;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .map-preview-btn {
+      display: inline-block;
+      margin: 6px 4px;
+      background: #004aad;
+      color: white;
+      text-decoration: none;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 4px 10px rgba(0, 74, 173, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .map-preview-btn:hover {
+      background: #00337a;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title">
+        <h1>⚡ ECE — Event Venue Roadmap</h1>
+        <p>Department of Electronics and Communication Engineering • Infinite TechFest</p>
+      </div>
+      <a href="index.html" class="back-btn">← Back to All Departments</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Overview Banner -->
+    <div class="summary-card">
+      <h2>Department of Electronics & Communication Engineering (ECE)</h2>
+      <p style="color: var(--muted); margin-top: 4px;">Six technical competitions spanning drone navigation arenas, hardware project exhibitions, circuit troubleshooting labs, escape rooms, and embedded hackathons.</p>
+      
+      <div class="summary-grid">
+        <div class="stat-box">
+          <div class="stat-icon">🏛️</div>
+          <div class="stat-info">
+            <h4>Start Point</h4>
+            <p>Saraswati Statue (Ground)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🚁</div>
+          <div class="stat-info">
+            <h4>Outdoor Arena</h4>
+            <p>Amphi Theatre (DRONOVA)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🔬</div>
+          <div class="stat-info">
+            <h4>Floor 2 Hub</h4>
+            <p>LH15, 16, 17 & Lamda Lab</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">📺</div>
+          <div class="stat-info">
+            <h4>Floor 4 Hub</h4>
+            <p>M412 (Paper Presentation)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 6 ECE Events -->
+    <div class="events-grid">
+      <!-- 1) Paper Presentation -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor4">Floor 4</span>
+          <h3>1) Paper Presentation</h3>
+          <div class="event-venue">📍 M412 ROOM</div>
+          <p>Technical paper presentations covering VLSI, Wireless Communications, Embedded IoT, and Optical Networks.</p>
+        </div>
+        <a href="four.html?venue=M412&drawPath=true" class="event-btn-action">View Floor 4 Map & Route →</a>
+      </div>
+
+      <!-- 2) Project Expo -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>2) Project Expo</h3>
+          <div class="event-venue">📍 LAMDA LAB (Lab-4)</div>
+          <p>Hardware prototype and embedded systems live project demonstrations evaluated by industry judges.</p>
+        </div>
+        <a href="two.html?venue=LAMDA LAB&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 3) CIRCUIT DEBUGGING -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>3) Circuit Debugging</h3>
+          <div class="event-venue">📍 LH15 (LH-15)</div>
+          <p>Hands-on circuit analysis, component fault identification, and breadboard troubleshooting contest.</p>
+        </div>
+        <a href="two.html?venue=LH15&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 4) DRONOVA -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-ground">Ground Floor</span>
+          <h3>4) DRONOVA</h3>
+          <div class="event-venue">📍 AMPHI THEATRE</div>
+          <p>Outdoor obstacle course drone racing, autonomous aerial maneuvers, and drone payload deployment challenge.</p>
+        </div>
+        <a href="Ground.html?venue=AMPHI&drawPath=true" class="event-btn-action">View Ground Floor Map & Route →</a>
+      </div>
+
+      <!-- 5) TECH ESCAPE ROOM -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>5) Tech Escape Room</h3>
+          <div class="event-venue">📍 LH16 (LH-16)</div>
+          <p>Hardware logic puzzle solving, decrypting sensor signals, and solving digital electronic mysteries to escape.</p>
+        </div>
+        <a href="two.html?venue=LH16&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 6) ECE HACKATHON -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>6) ECE Hackathon</h3>
+          <div class="event-venue">📍 LH17 (LH-17)</div>
+          <p>Intensive design sprint developing embedded IoT, PCB layouts, robotics, or signal processing firmware solutions.</p>
+        </div>
+        <a href="two.html?venue=LH17&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Wayfinding Section -->
+    <div class="roadmap-section">
+      <div class="section-title">
+        <span>Turn-by-Turn Wayfinding Roadmap</span>
+        <button id="speakAllBtn" class="audio-speech-btn" onclick="speakActiveDirections()">🔊 Listen to Audio Directions</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('ece-floor2-tab', this)">Floor 2 Hub: LH15, LH16, LH17 & Lamda Lab</button>
+        <button class="tab-btn" onclick="switchTab('ece-ground-tab', this)">Ground Floor Arena: DRONOVA (Amphi Theatre)</button>
+        <button class="tab-btn" onclick="switchTab('ece-floor4-tab', this)">Floor 4 Hub: M412 (Paper Presentation)</button>
+      </div>
+
+      <!-- Tab 1: Floor 2 Hub -->
+      <div id="ece-floor2-tab" class="tab-content active">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Floor 2 Hosts:</strong> Circuit Debugging (LH15), Tech Escape Room (LH16), ECE Hackathon (LH17), and Project Expo (Lamda Lab).</p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Assemble at the central entrance foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Take Staircase-SW or Lift to Floor 2</h4>
+              <p>Turn left and take the main southwest stairwell up two flights past Floor 1 to Floor 2.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>For Project Expo (LAMDA LAB)</h4>
+              <p>Turn left along the west corridor and proceed north to Lab-4 (LAMDA LAB) on your left.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>For LH15, LH16 & LH17</h4>
+              <p>Proceed straight through the south corridor past Staff Room, and turn left into the East Wing:
+                <br>• <strong>LH15</strong>: Circuit Debugging (First room on right)
+                <br>• <strong>LH16</strong>: Tech Escape Room (Middle room on right)
+                <br>• <strong>LH17</strong>: ECE Hackathon (Third room on right)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 2 Interactive Map — Direct Venue Routes</h4>
+          <p style="font-size: 13px; color: var(--muted);">Choose a venue to view animated shortest path from stairs:</p>
+          <a href="two.html?venue=LH15&drawPath=true" class="map-preview-btn">🚀 Route to LH15 (Circuit Debugging)</a>
+          <a href="two.html?venue=LH16&drawPath=true" class="map-preview-btn">🚀 Route to LH16 (Tech Escape Room)</a>
+          <a href="two.html?venue=LH17&drawPath=true" class="map-preview-btn">🚀 Route to LH17 (ECE Hackathon)</a>
+          <a href="two.html?venue=LAMDA LAB&drawPath=true" class="map-preview-btn">🚀 Route to LAMDA LAB (Project Expo)</a>
+        </div>
+      </div>
+
+      <!-- Tab 2: Ground Floor Arena (Amphi Theatre) -->
+      <div id="ece-ground-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Ground Floor Arena:</strong> DRONOVA Drone Racing & Obstacle Course.</p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Begin navigation at the central foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Take the Outdoor West Walkway</h4>
+              <p>Turn left and walk past the Principal's office corridor towards the outdoor western campus road.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Walk Past Canteen & EP Labs</h4>
+              <p>Follow the paved pathway past the cafeteria and open lawns.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Enter AMPHI THEATRE (Open Auditorium)</h4>
+              <p>Arrive at the open-air tiered Amphi Theatre drone arena. You have arrived!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Ground Floor Map — Amphi Theatre</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Registration Gate & Saraswati Statue to the Amphi Theatre</p>
+          <a href="Ground.html?venue=AMPHI&drawPath=true" class="map-preview-btn">🚀 Open Live Animated Path to Amphi Theatre</a>
+        </div>
+      </div>
+
+      <!-- Tab 3: Floor 4 Hub (M412) -->
+      <div id="ece-floor4-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Floor 4 Host:</strong> Paper Presentation in Room M412 (Smart TV Class Room).</p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Assemble at the central entrance foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Take Staircase-SW or Elevator up to Floor 4</h4>
+              <p>Ascend past Floor 1, Floor 2, and Floor 3 directly up to Floor 4.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Exit into the South Corridor</h4>
+              <p>Step out onto Floor 4 near the Seminar Hall.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Proceed to East Smart TV Classroom Wing</h4>
+              <p>Walk east along the corridor and turn left into the East classroom wing. <strong>M412 ROOM</strong> is on your right!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 4 Map — Room M412</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Stair-SW across Floor 4 into M412</p>
+          <a href="four.html?venue=M412&drawPath=true" class="map-preview-btn">🚀 Open Live Animated Path to M412</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>A National Level Technical Symposium — Infinite TechFest • Department of ECE Venue Guide</p>
+  </footer>
+
+  <script>
+    let activeTabId = 'ece-floor2-tab';
+
+    function switchTab(tabId, btn) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakActiveDirections() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this device/browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      let textToSpeak = "";
+      if (activeTabId === 'ece-floor2-tab') {
+        textToSpeak = "Roadmap to Floor 2 venues for ECE. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Turn left and take Staircase southwest or the elevator up to Floor 2. " +
+          "Step 3: For Lamda Lab, walk north to Lab 4 on your left. " +
+          "Step 4: For LH 15, LH 16, and LH 17, proceed to the East classroom wing on your right. You have arrived!";
+      } else if (activeTabId === 'ece-ground-tab') {
+        textToSpeak = "Roadmap to Amphi Theatre for DRONOVA. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Walk through the western outdoor campus corridor past the canteen. " +
+          "Step 3: Enter the open air Amphi Theatre drone arena. You have arrived!";
+      } else {
+        textToSpeak = "Roadmap to Floor 4 Room M412 for Paper Presentation. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Take Staircase southwest or elevator up to Floor 4. " +
+          "Step 3: Walk east along the corridor into the Smart TV classroom wing. Destination M412 is on your right. You have arrived!";
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.95;
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>

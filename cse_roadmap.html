@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="rpsit.png">
+  <title>CSE — Event Venue Roadmap | Infinite TechFest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #3730a3;
+      --primary-light: #e0e7ff;
+      --cse-accent: #6366f1;
+      --secondary: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --purple: #8b5cf6;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Top Institute Banner */
+    .banner-wrap {
+      background: white;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+    }
+
+    .banner-wrap img {
+      max-width: 100%;
+      height: auto;
+      max-height: 105px;
+      object-fit: contain;
+      display: inline-block;
+    }
+
+    header {
+      background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #4338ca 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 6px 24px rgba(79, 70, 229, 0.28);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      opacity: 0.88;
+      font-weight: 400;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(4px);
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 28px auto;
+      padding: 0 16px;
+    }
+
+    /* Summary Card */
+    .summary-card {
+      background: white;
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 26px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      border-left: 8px solid var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .summary-card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 14px 18px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      background: var(--primary-light);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-info p {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Search & Filter Bar */
+    .search-filter-wrap {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: all 0.2s ease;
+      background: white;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      opacity: 0.6;
+    }
+
+    /* Events Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 34px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 26px rgba(79, 70, 229, 0.16);
+      border-color: var(--cse-accent);
+    }
+
+    .event-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      width: fit-content;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge-floor4 {
+      background: #ede9fe;
+      color: #6d28d9;
+      border: 1px solid #ddd6fe;
+    }
+
+    .badge-floor2 {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-floor1 {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .badge-ground {
+      background: #d1fae5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    .event-card h3 {
+      font-size: 18px;
+      color: #0f172a;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .event-venue {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      line-height: 1.55;
+    }
+
+    .event-btn-action {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 11px 16px;
+      border-radius: 9px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .event-btn-action:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    /* Step-by-Step Wayfinding Section */
+    .roadmap-section {
+      background: white;
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 26px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .action-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .speech-btn, .copy-btn {
+      background: #f1f5f9;
+      color: #1e293b;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .speech-btn:hover, .copy-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-color: var(--primary);
+    }
+
+    .speech-btn.speaking {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #ef4444;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 6px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 11px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      border-radius: 6px 6px 0 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: #f8fafc;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: #eef2ff;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Route Steps Timeline */
+    .route-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 18px 0;
+      position: relative;
+    }
+
+    .route-steps::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      bottom: 24px;
+      left: 20px;
+      width: 2px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px white;
+      border: 2px solid var(--primary);
+    }
+
+    .step-text {
+      background: #f8fafc;
+      padding: 14px 18px;
+      border-radius: 12px;
+      flex: 1;
+      border: 1px solid var(--border);
+    }
+
+    .step-text h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .step-text p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .visual-map-container {
+      background: #f1f5f9;
+      border-radius: 14px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 1px dashed #cbd5e1;
+      text-align: center;
+    }
+
+    .map-preview-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin: 8px 6px;
+      transition: all 0.2s ease;
+    }
+
+    .map-preview-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      display: none;
+      z-index: 1000;
+      animation: toastIn 0.3s ease;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 640px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tab-bar {
+        flex-direction: column;
+      }
+      .tab-btn {
+        width: 100%;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Institute Banner -->
+  <div class="banner-wrap">
+    <img src="rpsit.png" alt="RP Sarathy Institute of Technology">
+  </div>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title">
+        <h1>💻 CSE — Event Venue Roadmap</h1>
+        <p>Department of Computer Science and Engineering • Infinite TechFest</p>
+      </div>
+      <div class="header-actions">
+        <a href="index.html" class="back-btn">← Campus Roadmap</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Overview Banner -->
+    <div class="summary-card">
+      <h2>Department of Computer Science and Engineering</h2>
+      <p style="color: var(--muted); margin-top: 6px;">
+        Explore all 6 signature events of the CSE Department spanning across Floor 4, Floor 2, Floor 1, and the Ground Floor. Use interactive shortest paths, audio voice guidance, and step-by-step directions to reach your competition venue.
+      </p>
+
+      <div class="summary-grid">
+        <div class="stat-box">
+          <div class="stat-icon">🏛️</div>
+          <div class="stat-info">
+            <h4>Starting Point</h4>
+            <p>Saraswati Statue (Ground Floor)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🏢</div>
+          <div class="stat-info">
+            <h4>Floor 4 Hub</h4>
+            <p>M421 &amp; M422 (Smart Rooms)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🧪</div>
+          <div class="stat-info">
+            <h4>Lab Venues</h4>
+            <p>Gamma Lab (F1) &amp; Epslion Lab (F2)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🛗</div>
+          <div class="stat-info">
+            <h4>Vertical Access</h4>
+            <p>Stairs-SW &amp; Lift Foyer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search / Filter -->
+    <div class="search-filter-wrap">
+      <div class="search-box">
+        <input type="text" id="eventSearch" placeholder="Search event name, venue or floor (e.g. Hackathon, Gamma, M421, LH-5)..." onkeyup="filterEvents()">
+      </div>
+    </div>
+
+    <!-- The 6 CSE Events Grid -->
+    <div class="events-grid" id="eventsGrid">
+
+      <!-- Event 1: FEATURE MINE -->
+      <div class="event-card" data-tags="feature mine m421 room floor 4 pitch startup innovation smart tv classroom presentation">
+        <div>
+          <span class="event-badge badge-floor4">Floor 4</span>
+          <h3>1) FEATURE MINE</h3>
+          <div class="event-venue">📍 M421 ROOM</div>
+          <p>Technical innovation competition, system design showcases, hardware/software innovation pitching, and creative project presentations.</p>
+        </div>
+        <a href="four.html?venue=M421&drawPath=true" class="event-btn-action">View Floor 4 Map &amp; Route →</a>
+      </div>
+
+      <!-- Event 2: Hackathon -->
+      <div class="event-card" data-tags="hackathon epsilon lab epslion lab floor 2 coding sprint build software app marathon">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>2) Hackathon</h3>
+          <div class="event-venue">📍 Epslion Lab (West Lab Wing)</div>
+          <p>High-energy collaborative software hackathon solving challenging real-world problems with cutting-edge tech stacks.</p>
+        </div>
+        <a href="two.html?venue=EPSILON LAB&drawPath=true" class="event-btn-action">View Floor 2 Map &amp; Route →</a>
+      </div>
+
+      <!-- Event 3: Project Expo (Mobile Application Development) -->
+      <div class="event-card" data-tags="project expo mobile application development gamma lab floor 1 android ios app">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1</span>
+          <h3>3) Project Expo (Mobile Application Development)</h3>
+          <div class="event-venue">📍 Gamma Lab (West Lab Wing)</div>
+          <p>Live project exhibition showcasing native/cross-platform mobile apps, cloud backends, and responsive UI/UX creations.</p>
+        </div>
+        <a href="one.html?venue=GAMMA LAB&drawPath=true" class="event-btn-action">View Floor 1 Map &amp; Route →</a>
+      </div>
+
+      <!-- Event 4: Snap with AI (Poster Making) -->
+      <div class="event-card" data-tags="snap with ai poster making lh-5 lh05 ground floor graphic art creative design genai">
+        <div>
+          <span class="event-badge badge-ground">Ground Floor</span>
+          <h3>4) Snap with AI (Poster Making)</h3>
+          <div class="event-venue">📍 LH - 5 (East Wing Lecture Hall)</div>
+          <p>Digital creative poster design powered by generative AI tools, prompt crafting, and compelling visual storytelling.</p>
+        </div>
+        <a href="Ground.html?venue=LH05&drawPath=true" class="event-btn-action">View Ground Floor Map &amp; Route →</a>
+      </div>
+
+      <!-- Event 5: Cyber Hunt (Technical Quiz) -->
+      <div class="event-card" data-tags="cyber hunt technical quiz lh-08 lh08 floor 1 class room security mystery puzzle ctf">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1</span>
+          <h3>5) Cyber Hunt (Technical Quiz)</h3>
+          <div class="event-venue">📍 LH – 08 Class Room (East Wing)</div>
+          <p>Cryptic clues, technical decryption, cyber-trivia rounds, and mind-bending technical scavenger hunt.</p>
+        </div>
+        <a href="one.html?venue=LH08&drawPath=true" class="event-btn-action">View Floor 1 Map &amp; Route →</a>
+      </div>
+
+      <!-- Event 6: AI Prompt Battle (Using Claude AI) -->
+      <div class="event-card" data-tags="ai prompt battle using claude ai m422 floor 4 smart tv classroom llm genai showdown">
+        <div>
+          <span class="event-badge badge-floor4">Floor 4</span>
+          <h3>6) AI Prompt Battle (Using Claude AI)</h3>
+          <div class="event-venue">📍 M422 (Smart TV Class Room)</div>
+          <p>Head-to-head live AI prompt craft duel testing precision prompt engineering, Claude AI reasoning, and generative speed.</p>
+        </div>
+        <a href="four.html?venue=M422&drawPath=true" class="event-btn-action">View Floor 4 Map &amp; Route →</a>
+      </div>
+
+    </div>
+
+    <!-- Step-by-Step Wayfinding Section -->
+    <div class="roadmap-section">
+      <div class="section-title">
+        <span>Turn-by-Turn Wayfinding Roadmap</span>
+        <div class="action-controls">
+          <button id="speakBtn" class="speech-btn" onclick="toggleSpeech()">🔊 Listen to Audio Directions</button>
+          <button id="copyBtn" class="copy-btn" onclick="copyDirections()">📋 Copy Steps</button>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('floor4-hub-tab', this)">
+          <span>🏢 Floor 4 Hub: M421 &amp; M422</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('floor2-hub-tab', this)">
+          <span>🎨 Floor 2 Hub: Epslion Lab</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('floor1-hub-tab', this)">
+          <span>🧪 Floor 1 Hub: Gamma Lab &amp; LH-08</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('ground-hub-tab', this)">
+          <span>⚡ Ground Floor Hub: LH - 5</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Floor 4 Hub -->
+      <div id="floor4-hub-tab" class="tab-content active">
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          <strong>Floor 4 Hosts:</strong> <em>1) FEATURE MINE in Room M421</em> and <em>6) AI Prompt Battle (Using Claude AI) in Room M422</em>.
+        </p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Assemble at the central entrance foyer facing the main registration reception.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Take Staircase-SW or Elevator up to Floor 4</h4>
+              <p>Turn left and take the main Southwest stairwell or elevator all the way up past Floor 1, Floor 2, and Floor 3 directly to Floor 4.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>For AI Prompt Battle (Using Claude AI) — Room M422</h4>
+              <p>Step out into the South corridor and walk east past the Seminar Hall. <strong>Room M422 (Smart TV Class Room)</strong> is located directly along the south wall on your right!</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>For FEATURE MINE — Room M421</h4>
+              <p>Continue slightly further east past Room M422 along the South corridor. <strong>Room M421 (M421 ROOM)</strong> is the adjacent room right on your right side!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Interactive Floor 4 Map Routes</h4>
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 12px;">Open animated shortest paths from stairs:</p>
+          <a href="four.html?venue=M421&drawPath=true" class="map-preview-btn">🚀 Route to M421 (FEATURE MINE)</a>
+          <a href="four.html?venue=M422&drawPath=true" class="map-preview-btn">🚀 Route to M422 (AI Prompt Battle)</a>
+        </div>
+      </div>
+
+      <!-- Tab 2: Floor 2 Hub -->
+      <div id="floor2-hub-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          <strong>Floor 2 Host:</strong> <em>2) Hackathon in Epslion Lab</em>.
+        </p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Begin navigation at the central entrance foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Climb to Floor 2 via Southwest Stairwell or Lift</h4>
+              <p>Take Staircase-SW up two flights (past Floor 1) to Floor 2, or use the lift.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Enter West Lab Corridor</h4>
+              <p>Turn left into the West corridor dedicated to computer science and specialized software laboratories.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Arrive at Epslion Lab (Lab 14)</h4>
+              <p>Walk past Delta Lab. <strong>Epslion Lab</strong> is right on your left between Delta Lab and Zeta Lab. You have arrived at the Hackathon!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Interactive Floor 2 Map Route</h4>
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 12px;">Animated path directly to Epslion Lab:</p>
+          <a href="two.html?venue=EPSILON LAB&drawPath=true" class="map-preview-btn">🚀 Route to Epslion Lab (Hackathon)</a>
+        </div>
+      </div>
+
+      <!-- Tab 3: Floor 1 Hub -->
+      <div id="floor1-hub-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          <strong>Floor 1 Hosts:</strong> <em>3) Project Expo (Mobile Application Development) in Gamma Lab</em> and <em>5) Cyber Hunt (Technical Quiz) in LH – 08 Class Room</em>.
+        </p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Begin navigation at the central foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Ascend to Floor 1 via Staircase-SW or Elevator</h4>
+              <p>Turn left and climb one flight of stairs (or take the lift) to Floor 1.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>For Project Expo (Gamma Lab)</h4>
+              <p>Turn left into the West computer lab corridor. Walk north past Alpha Lab and Beta Lab. <strong>Gamma Lab</strong> is the spacious laboratory on your left!</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>For Cyber Hunt (LH – 08 Class Room)</h4>
+              <p>From the stairs, proceed east along the South corridor past Seminar Hall 1 and Staff Room. Turn left into the East wing corridor. <strong>LH – 08 Class Room</strong> is on your right!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Interactive Floor 1 Map Routes</h4>
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 12px;">Direct live navigation to Floor 1 venues:</p>
+          <a href="one.html?venue=GAMMA LAB&drawPath=true" class="map-preview-btn">🚀 Route to Gamma Lab (Project Expo)</a>
+          <a href="one.html?venue=LH08&drawPath=true" class="map-preview-btn">🚀 Route to LH-08 (Cyber Hunt)</a>
+        </div>
+      </div>
+
+      <!-- Tab 4: Ground Floor Hub -->
+      <div id="ground-hub-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          <strong>Ground Floor Host:</strong> <em>4) Snap with AI (Poster Making) in LH - 5</em>.
+        </p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>You are already on the Ground Floor!</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Walk East Along the Main Administrative Corridor</h4>
+              <p>Turn right and walk straight along the corridor past Career Development Cell (CDC).</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Turn Left into the East Lecture Hall Wing</h4>
+              <p>Turn north into the east corridor leading past lecture halls LH01, LH02, LH03, and LH04.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Arrive at LH - 5</h4>
+              <p>Proceed along the wing. <strong>LH - 5 (Lecture Hall 05)</strong> is on your right side. You have arrived at the Snap with AI arena!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Interactive Ground Floor Map Route</h4>
+          <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 12px;">Direct live route across the Ground Floor:</p>
+          <a href="Ground.html?venue=LH05&drawPath=true" class="map-preview-btn">🚀 Route to LH - 5 (Snap with AI)</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="toast" class="toast">Directions copied to clipboard!</div>
+
+  <footer>
+    <p>Department of Computer Science and Engineering • Infinite TechFest • RP Sarathy Institute of Technology</p>
+  </footer>
+
+  <script>
+    let activeTabId = 'floor4-hub-tab';
+    let isSpeaking = false;
+
+    function switchTab(tabId, btn) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      if (btn) btn.classList.add('active');
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        updateSpeechButtonState();
+      }
+    }
+
+    function toggleSpeech() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this browser.");
+        return;
+      }
+
+      if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        updateSpeechButtonState();
+        return;
+      }
+
+      const activeTab = document.getElementById(activeTabId);
+      if (!activeTab) return;
+
+      const steps = activeTab.querySelectorAll('.step-text');
+      let textToRead = "";
+
+      if (activeTabId === 'floor4-hub-tab') {
+        textToRead = "Wayfinding roadmap to Floor 4 Hub for FEATURE MINE and AI Prompt Battle. ";
+      } else if (activeTabId === 'floor2-hub-tab') {
+        textToRead = "Wayfinding roadmap to Floor 2 Hub for Hackathon in Epslion Lab. ";
+      } else if (activeTabId === 'floor1-hub-tab') {
+        textToRead = "Wayfinding roadmap to Floor 1 Hub for Project Expo in Gamma Lab and Cyber Hunt in LH-08. ";
+      } else {
+        textToRead = "Wayfinding roadmap to Ground Floor Hub for Snap with AI in LH-5. ";
+      }
+
+      steps.forEach((step, idx) => {
+        const title = step.querySelector('h4')?.innerText || '';
+        const desc = step.querySelector('p')?.innerText || '';
+        textToRead += `Step ${idx + 1}: ${title}. ${desc} `;
+      });
+
+      const utterance = new SpeechSynthesisUtterance(textToRead);
+      utterance.rate = 0.95;
+      utterance.lang = 'en-US';
+
+      utterance.onend = () => {
+        isSpeaking = false;
+        updateSpeechButtonState();
+      };
+
+      utterance.onerror = () => {
+        isSpeaking = false;
+        updateSpeechButtonState();
+      };
+
+      window.speechSynthesis.speak(utterance);
+      isSpeaking = true;
+      updateSpeechButtonState();
+    }
+
+    function updateSpeechButtonState() {
+      const btn = document.getElementById('speakBtn');
+      if (!btn) return;
+      if (isSpeaking) {
+        btn.innerHTML = '⏹️ Stop Audio Directions';
+        btn.classList.add('speaking');
+      } else {
+        btn.innerHTML = '🔊 Listen to Audio Directions';
+        btn.classList.remove('speaking');
+      }
+    }
+
+    function copyDirections() {
+      const activeTab = document.getElementById(activeTabId);
+      if (!activeTab) return;
+
+      const steps = activeTab.querySelectorAll('.step-text');
+      let text = "CSE EVENT ROADMAP DIRECTIONS:\n\n";
+
+      steps.forEach((step, idx) => {
+        const title = step.querySelector('h4')?.innerText || '';
+        const desc = step.querySelector('p')?.innerText || '';
+        text += `Step ${idx + 1}: ${title}\n${desc}\n\n`;
+      });
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("Directions copied to clipboard!");
+      }).catch(() => {
+        showToast("Failed to copy directions.");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    }
+
+    function filterEvents() {
+      const query = document.getElementById('eventSearch').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#eventsGrid .event-card');
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3')?.innerText.toLowerCase() || '';
+        const venue = card.querySelector('.event-venue')?.innerText.toLowerCase() || '';
+        const desc = card.querySelector('p')?.innerText.toLowerCase() || '';
+        const tags = card.getAttribute('data-tags') || '';
+
+        if (title.includes(query) || venue.includes(query) || desc.includes(query) || tags.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

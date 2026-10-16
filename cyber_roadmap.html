@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="rpsit.png">
+  <title>CSE (Cybersecurity) — Event Venue Roadmap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #00337a;
+      --primary-light: #e3f2fd;
+      --cyber-neon: #0ea5e9;
+      --cyber-dark: #0f172a;
+      --accent: #ff5252;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --bg: #f0f4fa;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #004aad 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0, 74, 173, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Venue Summary Banner */
+    .summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-left: 6px solid #0ea5e9;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      background: var(--primary-light);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-info p {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Events Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0, 74, 173, 0.15);
+      border-color: #0ea5e9;
+    }
+
+    .event-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .badge-floor1 {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .badge-floor2 {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .event-card h3 {
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .event-venue {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .event-btn-action {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.25s;
+      display: block;
+    }
+
+    .event-btn-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Roadmap Wayfinding Section */
+    .roadmap-section {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      border-left: 5px solid #0ea5e9;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.25s;
+    }
+
+    .tab-btn.active {
+      background: #004aad;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Steps */
+    .route-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #edf2f7;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #004aad;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-text h4 {
+      font-size: 14px;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .audio-speech-btn {
+      background: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      transition: background 0.25s;
+    }
+
+    .audio-speech-btn:hover {
+      background: #00337a;
+    }
+
+    .visual-map-container {
+      background: #eef4fb;
+      border: 2px solid #bcd7ee;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .map-preview-btn {
+      display: inline-block;
+      margin-top: 12px;
+      background: #004aad;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 74, 173, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .map-preview-btn:hover {
+      background: #00337a;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title">
+        <h1>🛡️ CSE (Cybersecurity) — Event Venue Roadmap</h1>
+        <p>Technical Symposium 2K25/2026 • RP Sarathy Institute of Technology</p>
+      </div>
+      <a href="index.html" class="back-btn">← Back to All Departments</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Overview Banner -->
+    <div class="summary-card">
+      <h2>Department of Computer Science & Engineering (Cybersecurity)</h2>
+      <p style="color: var(--muted); margin-top: 4px;">Six high-stakes security competitions, offensive/defensive challenges, technical paper presentations, and hackathons hosted across two state-of-the-art venue hubs.</p>
+      
+      <div class="summary-grid">
+        <div class="stat-box">
+          <div class="stat-icon">🏛️</div>
+          <div class="stat-info">
+            <h4>Start Location</h4>
+            <p>Saraswati Statue (Ground Floor)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">💻</div>
+          <div class="stat-info">
+            <h4>Floor 1 Hub</h4>
+            <p>ALPHA LAB (3 Lab Events)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-info">
+            <h4>Floor 2 Hub</h4>
+            <p>M211 ROOM (3 Hall Events)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🛗</div>
+          <div class="stat-info">
+            <h4>Vertical Access</h4>
+            <p>Stairs-SW & Lift</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 6 Cybersecurity Events -->
+    <div class="events-grid">
+      <!-- 1) Cyber Paper Presentation -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>1) Cyber Paper Presentation</h3>
+          <div class="event-venue">📍 M211 ROOM (LH-21)</div>
+          <p>Research paper presentations covering Network Security, Cryptography, Blockchain, and AI-driven defense.</p>
+        </div>
+        <a href="two.html?venue=M211&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 2) Cyber Hunt -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1</span>
+          <h3>2) Cyber Hunt (TechnicalQuiz)</h3>
+          <div class="event-venue">📍 ALPHA LAB</div>
+          <p>Time-bound cybersecurity quiz prelims followed by live Capture-the-Flag (CTF) trivia and log-analysis rounds.</p>
+        </div>
+        <a href="one.html?venue=Alpha LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- 3) PhishGuard -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1</span>
+          <h3>3) PhishGuard: Phishing Website Detection</h3>
+          <div class="event-venue">📍 ALPHA LAB</div>
+          <p>Hands-on lab challenge to identify malicious URLs, cloned headers, and deploy ML phishing detectors.</p>
+        </div>
+        <a href="one.html?venue=Alpha LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- 4) Cybersecurity Spotlight -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>4) Cybersecurity Spotlight: Tech Talks</h3>
+          <div class="event-venue">📍 M211 ROOM (LH-21)</div>
+          <p>Expert and student technical lightning talks addressing zero-day defense, SOC architectures, and forensics.</p>
+        </div>
+        <a href="two.html?venue=M211&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 5) CyberSecure Hackathon -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>5) CyberSecure Hackathon</h3>
+          <div class="event-venue">📍 M211 ROOM (LH-21)</div>
+          <p>Intensive hackathon solving real-world cybersecurity problems, secure code auditing, and security tools.</p>
+        </div>
+        <a href="two.html?venue=M211&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 6) Cyber Escape room -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1</span>
+          <h3>6) Cyber Escape Room (Problem Solving)</h3>
+          <div class="event-venue">📍 ALPHA LAB</div>
+          <p>Gamified problem-solving escape room: decode ciphers, crack passwords, and trace packet payloads to escape.</p>
+        </div>
+        <a href="one.html?venue=Alpha LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Wayfinding Section -->
+    <div class="roadmap-section">
+      <div class="section-title">
+        <span>Turn-by-Turn Wayfinding Roadmap</span>
+        <button id="speakAllBtn" class="audio-speech-btn" onclick="speakActiveDirections()">🔊 Listen to Audio Directions</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('floor1-hub-tab', this)">Floor 1 Hub: ALPHA LAB (3 Events)</button>
+        <button class="tab-btn" onclick="switchTab('floor2-hub-tab', this)">Floor 2 Hub: M211 ROOM (3 Events)</button>
+      </div>
+
+      <!-- Tab 1: Floor 1 (ALPHA LAB) -->
+      <div id="floor1-hub-tab" class="tab-content active">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Events at Alpha Lab:</strong> Cyber Hunt (TechnicalQuiz), PhishGuard, and Cyber Escape Room.</p>
+        
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Assemble at Saraswati Statue (Ground Floor)</h4>
+              <p>Start at the central foyer opposite the main symposium registration gate.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Head Left to Staircase (Stair-SW / Lift)</h4>
+              <p>Turn left and take the main southwest stairwell or elevator.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Climb to Floor 1</h4>
+              <p>Walk up one flight of stairs to arrive on Floor 1.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Turn Left Immediately into West Corridor</h4>
+              <p>As you exit the stairs, turn left immediately into the West Labs corridor.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              <h4>Arrive at ALPHA LAB</h4>
+              <p>Destination <strong>Alpha Lab (Cybersecurity Lab)</strong> is right on your left. You have arrived!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 1 Interactive Map — Alpha Lab</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Stair-SW along West Corridor into Alpha Lab</p>
+          <a href="one.html?venue=Alpha LAB&drawPath=true" class="map-preview-btn">🚀 Open Live Animated Path in Floor 1 Map</a>
+        </div>
+      </div>
+
+      <!-- Tab 2: Floor 2 (M211 ROOM) -->
+      <div id="floor2-hub-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Events at M211 Room:</strong> Cyber Paper Presentation, Cybersecurity Spotlight: Tech Talks, and CyberSecure Hackathon.</p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Assemble at Saraswati Statue (Ground Floor)</h4>
+              <p>Start at the central entrance foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Take Stair-SW or Elevator up to Floor 2</h4>
+              <p>Turn left and climb two flights of stairs (past Floor 1) directly up to Floor 2.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Exit into the South Corridor</h4>
+              <p>Step out into the southern corridor of Floor 2.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Walk Straight Past SH-2 and Staff Room</h4>
+              <p>Proceed along the wide southern hallway towards the central hall.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              <h4>Arrive at M211 ROOM (LH-21)</h4>
+              <p>Destination <strong>Room M211 (Cybersecurity Hall / LH-21)</strong> is on your right. You have arrived!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 2 Interactive Map — M211 Room</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Stair-SW along South Corridor to M211</p>
+          <a href="two.html?venue=M211&drawPath=true" class="map-preview-btn">🚀 Open Live Animated Path in Floor 2 Map</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>A National Level Technical Symposium — Infinite TechFest • Department of CSE (Cybersecurity) Venue Guide</p>
+  </footer>
+
+  <script>
+    let activeTabId = 'floor1-hub-tab';
+
+    function switchTab(tabId, btn) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakActiveDirections() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this device/browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      let textToSpeak = "";
+      if (activeTabId === 'floor1-hub-tab') {
+        textToSpeak = "Roadmap to Floor 1, Alpha Lab for Cyber Hunt, PhishGuard, and Cyber Escape room. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Turn left and take Staircase southwest or the elevator. " +
+          "Step 3: Climb to Floor 1. " +
+          "Step 4: Turn left immediately into the West corridor. " +
+          "Step 5: Alpha Lab is right on your left. You have arrived!";
+      } else {
+        textToSpeak = "Roadmap to Floor 2, Room M211 for Cyber Paper Presentation, Tech Talks, and CyberSecure Hackathon. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Turn left and take Staircase southwest or the elevator up to Floor 2. " +
+          "Step 3: Step out into the south corridor. " +
+          "Step 4: Walk straight past SH-2 and the Staff Room. " +
+          "Step 5: Room M211 is on your right. You have arrived!";
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.95;
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>

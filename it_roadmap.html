@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="theme-color" content="#0284c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="shortcut icon" href="rpsit.png">
+  <title>Information Technology (IT) — Event Venue Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --it-accent: #0ea5e9;
+      --secondary: #6366f1;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --purple: #8b5cf6;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #0369a1 50%, #0284c7 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Summary Card */
+    .summary-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+      border-left: 8px solid var(--it-accent);
+      border: 1px solid var(--border);
+    }
+
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      background: #e0f2fe;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-info p {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Events Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(2, 132, 199, 0.16);
+      border-color: var(--it-accent);
+    }
+
+    .event-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      width: fit-content;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge-floor1 {
+      background: #ede9fe;
+      color: #7c3aed;
+    }
+
+    .badge-floor2 {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .event-card h3 {
+      font-size: 18px;
+      color: #0f172a;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .event-venue {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .event-btn-action {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 11px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: 0.25s;
+      display: block;
+    }
+
+    .event-btn-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Roadmap Section */
+    .roadmap-section {
+      background: white;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 18px;
+      border-left: 5px solid var(--primary);
+      padding-left: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .speech-btn,
+    .copy-btn {
+      background: #f1f5f9;
+      color: #1e293b;
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .speech-btn:hover,
+    .copy-btn:hover {
+      background: #e2e8f0;
+      color: var(--primary);
+    }
+
+    .speech-btn.speaking {
+      background: #fee2e2;
+      color: #ef4444;
+      border-color: #fca5a5;
+    }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: #f8fafc;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: #f0f9ff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Step Items */
+    .route-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #f8fafc;
+      padding: 16px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+    }
+
+    .step-item:hover {
+      background: #f0f9ff;
+      border-color: #bae6fd;
+      transform: translateX(4px);
+    }
+
+    .step-number {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+    }
+
+    .step-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .step-text p {
+      font-size: 13.5px;
+      color: #475569;
+    }
+
+    .step-badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 6px;
+    }
+
+    /* Map Action Card */
+    .visual-map-container {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 24px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.2);
+    }
+
+    .visual-map-container h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #38bdf8;
+    }
+
+    .visual-map-container p {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .map-preview-btn {
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      color: white;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+    }
+
+    .map-preview-btn:hover {
+      background: linear-gradient(135deg, #38bdf8 0%, #0369a1 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(14, 165, 233, 0.5);
+    }
+
+    /* Guidelines Section */
+    .guidelines-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .guide-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .guide-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .guide-card ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+      color: #475569;
+    }
+
+    .guide-card ul li {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .guide-card ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    /* Search & Filter Component */
+    .search-filter-wrap {
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 40px 13px 44px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      font-size: 14.5px;
+      font-family: inherit;
+      background: #ffffff;
+      color: #0f172a;
+      outline: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      -webkit-appearance: none;
+      touch-action: manipulation;
+    }
+
+    .search-box input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .clear-search {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #e2e8f0;
+      border: none;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 12px;
+      color: #475569;
+      touch-action: manipulation;
+    }
+
+    .filter-chips {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chip-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: white;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .chip-btn:active {
+      transform: scale(0.96);
+    }
+
+    .chip-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.25);
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 30px 16px;
+      background: white;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* Mobile Floating Quick Action Dock */
+    .mobile-dock {
+      display: none;
+    }
+
+    /* Global Touch Performance */
+    button, a, input {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-dock {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(15, 23, 42, 0.94);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+        z-index: 999;
+        justify-content: space-around;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      .dock-btn {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        padding: 7px 4px;
+        color: white;
+        text-decoration: none;
+        font-size: 11px;
+        font-weight: 600;
+        font-family: inherit;
+        transition: all 0.15s ease;
+        cursor: pointer;
+      }
+
+      .dock-btn:active {
+        background: rgba(255, 255, 255, 0.22);
+        transform: scale(0.96);
+      }
+
+      .dock-btn.primary {
+        background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        border-color: rgba(56, 189, 248, 0.5);
+        box-shadow: 0 2px 10px rgba(14, 165, 233, 0.4);
+      }
+
+      .dock-btn .dock-icon {
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      body {
+        padding-bottom: 75px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 14px 14px;
+      }
+
+      .header-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .header-title h1 {
+        font-size: 17px;
+        gap: 6px;
+      }
+
+      .header-title p {
+        font-size: 11.5px;
+        line-height: 1.3;
+      }
+
+      .back-btn {
+        padding: 6px 12px;
+        font-size: 12.5px;
+        border-radius: 6px;
+        white-space: nowrap;
+      }
+
+      .container {
+        padding: 0 12px;
+        margin: 14px auto;
+      }
+
+      .summary-card {
+        padding: 16px;
+        border-radius: 14px;
+        margin-bottom: 16px;
+      }
+
+      .summary-title {
+        font-size: 17px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .stat-box {
+        padding: 10px 10px;
+        gap: 8px;
+        border-radius: 10px;
+      }
+
+      .stat-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+
+      .stat-info h4 {
+        font-size: 9.5px;
+      }
+
+      .stat-info p {
+        font-size: 13px;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+
+      .event-card {
+        padding: 16px;
+        border-radius: 12px;
+      }
+
+      .event-card h3 {
+        font-size: 16px;
+      }
+
+      .event-venue {
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+
+      .event-card p {
+        font-size: 12.5px;
+        margin-bottom: 14px;
+      }
+
+      .event-btn-action {
+        padding: 12px;
+        font-size: 14px;
+        border-radius: 8px;
+      }
+
+      .event-btn-action:active {
+        transform: scale(0.98);
+      }
+
+      .roadmap-section {
+        padding: 16px;
+        border-radius: 14px;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-size: 17px;
+        margin-bottom: 14px;
+        padding-left: 10px;
+      }
+
+      .action-controls {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .speech-btn,
+      .copy-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+        font-size: 12.5px;
+      }
+
+      .tab-bar {
+        display: flex;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 6px;
+        border-bottom: none;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .tab-bar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .tab-btn {
+        flex: 0 0 auto;
+        width: auto;
+        padding: 10px 16px;
+        font-size: 13px;
+        border-radius: 10px;
+        background: #f1f5f9;
+        border: 1px solid var(--border);
+        white-space: nowrap;
+      }
+
+      .tab-btn.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        border-bottom: 1px solid var(--primary);
+      }
+
+      .step-item {
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 10px;
+      }
+
+      .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+      }
+
+      .step-text h4 {
+        font-size: 14px;
+      }
+
+      .step-text p {
+        font-size: 12.5px;
+      }
+
+      .visual-map-container {
+        padding: 18px 14px;
+        border-radius: 12px;
+        margin-top: 18px;
+      }
+
+      .visual-map-container h3 {
+        font-size: 16px;
+      }
+
+      .visual-map-container p {
+        font-size: 12.5px;
+        margin-bottom: 16px;
+      }
+
+      .map-preview-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 13px;
+        font-size: 14px;
+      }
+
+      .guidelines-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .guide-card {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title">
+        <h1><span>💡</span> Department of Information Technology (IT)</h1>
+        <p>National Level Technical Symposium • Event Venue Roadmap</p>
+      </div>
+      <a href="index.html" class="back-btn">← Back to All Departments</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Summary Banner -->
+    <div class="summary-card">
+      <h2 class="summary-title"><span>📍</span> Department Event Hubs & Schedule</h2>
+      <div class="summary-grid">
+        <div class="stat-box">
+          <div class="stat-icon">💻</div>
+          <div class="stat-info">
+            <h4>Floor 1 Hub</h4>
+            <p>BETA LAB (4 Lab Events)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">📄</div>
+          <div class="stat-info">
+            <h4>Floor 1 Smart Hall</h4>
+            <p>M213 (2 Hall Events)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-info">
+            <h4>Event Timing</h4>
+            <p>10:00 AM – 1:00 PM</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🚶</div>
+          <div class="stat-info">
+            <h4>Primary Access</h4>
+            <p>Stairs-SW (Left of Statue)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Quick Search & Venue Filter -->
+    <div class="search-filter-wrap">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="mobileSearch" placeholder="Search events or venues (Prompt, M213, Innopapers, Beta)..." oninput="filterMobileEvents(this.value)">
+        <button id="clearSearchBtn" class="clear-search" onclick="clearMobileSearch()" style="display:none;" title="Clear search">✕</button>
+      </div>
+      <div class="filter-chips">
+        <button class="chip-btn active" onclick="filterByChip('all', this)">⚡ All Events (6)</button>
+        <button class="chip-btn" onclick="filterByChip('beta', this)">🧪 Beta Lab (4)</button>
+        <button class="chip-btn" onclick="filterByChip('m213', this)">📺 M213 Smart Room (2)</button>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="noResultsMsg" class="no-results">
+      <p style="font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 4px;">No matching IT events found</p>
+      <p>Try searching for "Beta", "M213", "Claude", or "Innopapers"</p>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="events-grid" id="eventsGrid">
+      <!-- Event 1: Claude Prompt Battle -->
+      <div class="event-card" data-venue="beta" data-tags="claude prompt battle beta lab floor 1 ai arena code reasoning anthropic">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1 • AI Arena</span>
+          <h3>1) Claude Prompt Battle</h3>
+          <div class="event-venue">📍 BETA LAB (Floor 1)</div>
+          <p>Compete head-to-head in real-time prompt engineering challenges using Anthropic's Claude. Optimize tokens,
+            craft chain-of-thought instructions, and solve reasoning & code puzzles.</p>
+        </div>
+        <a href="one.html?venue=BETA LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- Event 2: Web Architects -->
+      <div class="event-card" data-venue="beta" data-tags="web architects full stack beta lab floor 1 ux backend modern web responsive">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1 • Full-Stack Hub</span>
+          <h3>2) Web Architects</h3>
+          <div class="event-venue">📍 BETA LAB (Floor 1)</div>
+          <p>Full-stack web design & architectural hackathon. Build scalable, responsive modern web apps featuring clean
+            UX, API integrations, and robust database backends.</p>
+        </div>
+        <a href="one.html?venue=BETA LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- Event 3: Poster Pitch -->
+      <div class="event-card" data-venue="beta" data-tags="poster pitch ideation beta lab floor 1 research visual digital concepts">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1 • Ideation Deck</span>
+          <h3>3) Poster Pitch</h3>
+          <div class="event-venue">📍 BETA LAB (Floor 1)</div>
+          <p>Rapid visual pitch competition. Present innovative technical concepts, system architectures, and
+            breakthrough research via digital and printed poster displays.</p>
+        </div>
+        <a href="one.html?venue=BETA LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- Event 4: Bug Hunt -->
+      <div class="event-card" data-venue="beta" data-tags="bug hunt debug beta lab floor 1 speed coding c++ python java troubleshooting">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1 • Debug Arena</span>
+          <h3>4) Bug Hunt</h3>
+          <div class="event-venue">📍 BETA LAB (Floor 1)</div>
+          <p>Speed code debugging competition. Hunt, identify, and squash complex logical, runtime, syntax, and
+            concurrency bugs across Python, C++, Java, and Web codebases.</p>
+        </div>
+        <a href="one.html?venue=BETA LAB&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- Event 5: Innopapers -->
+      <div class="event-card" data-venue="m213" data-tags="innopapers spectrum innovation paper presentation m213 smart class room floor 1 cloud ai">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1 • Smart Hall</span>
+          <h3>5) Innopapers: The Spectrum of Innovation</h3>
+          <div class="event-venue">📍 M213 SMART CLASS ROOM (Floor 1)</div>
+          <p>National level technical paper presentation covering Cloud Architecture, Generative AI, Cyber-Physical
+            Systems, and Next-Gen Software Innovation.</p>
+        </div>
+        <a href="one.html?venue=M213&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+
+      <!-- Event 6: Project Presentation -->
+      <div class="event-card" data-venue="m213" data-tags="project presentation working model m213 smart class room floor 1 iot prototypes embedded">
+        <div>
+          <span class="event-badge badge-floor1">Floor 1 • Project Arena</span>
+          <h3>6) Project Presentation</h3>
+          <div class="event-venue">📍 M213 SMART CLASS ROOM (Floor 1)</div>
+          <p>Live working model demonstrations, hardware-software embedded systems, IoT prototypes, and full-scale tech
+            project presentations judged by industry panelists.</p>
+        </div>
+        <a href="one.html?venue=M213&drawPath=true" class="event-btn-action">View Floor 1 Map & Route →</a>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Wayfinding Section -->
+    <div class="roadmap-section">
+      <div class="section-title">
+        <span>🚶 Turn-by-Turn Wayfinding Roadmap</span>
+        <div class="action-controls">
+          <button class="speech-btn" id="speakBtn" onclick="toggleSpeech()">
+            <span id="speakerIcon">🔊</span> Listen Directions
+          </button>
+          <button class="copy-btn" onclick="copyDirections()">
+            📋 Copy Path
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Bar -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('floor1-beta-tab', this)">Floor 1: BETA LAB (4 Events: Prompt
+          Battle, Web Architects, Poster Pitch, Bug Hunt)</button>
+        <button class="tab-btn" onclick="switchTab('floor1-m213-tab', this)">Floor 1: M213 SMART CLASS ROOM (Innopapers
+          & Project Presentation)</button>
+      </div>
+
+      <!-- Tab 1: Floor 1 (Beta Lab) -->
+      <div id="floor1-beta-tab" class="tab-content active">
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          <strong>Venue:</strong> BETA LAB (Floor 1 West Wing) • <strong>Events:</strong> Claude Prompt Battle, Web
+          Architects, Poster Pitch & Bug Hunt
+        </p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue / Central Foyer <span class="step-badge">Ground Floor</span></h4>
+              <p>Assemble at the central landmark (Saraswati Statue) directly opposite the main symposium registration
+                desk.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Head to Southwest Staircase (Stair-SW)</h4>
+              <p>Turn left from the central foyer and walk towards the Southwest staircase / lift area.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Climb Stairs Up to Floor 1 (F1) <span class="step-badge">Floor 1</span></h4>
+              <p>Climb one flight of stairs to Floor 1 and enter through the main wing entrance.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Turn Left into the West Lab Corridor</h4>
+              <p>Turn left immediately into the West corridor dedicated to computer science and IT labs.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              <h4>Walk Straight Past Alpha Lab</h4>
+              <p>Walk straight along the corridor passing Alpha Lab (Cybersecurity) on your left.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-text">
+              <h4>Arrive at BETA LAB <span class="step-badge">Destination</span></h4>
+              <p>Destination <strong>BETA LAB (Prompt Battle, Web Architects, Poster Pitch & Bug Hunt)</strong> is on
+                your left, right between Alpha Lab and Gamma Lab.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h3>Floor 1 Interactive Map — BETA LAB</h3>
+          <p>View real-time waypoint routing from Stair-SW directly along the west corridor to Beta Lab.</p>
+          <a href="one.html?venue=BETA LAB&drawPath=true" class="map-preview-btn">
+            🚀 Open Live Animated Path to Beta Lab in Floor 1 Map →
+          </a>
+        </div>
+      </div>
+
+      <!-- Tab 2: Floor 1 (M213 Smart Class Room) -->
+      <div id="floor1-m213-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 14px;">
+          <strong>Venue:</strong> M213 SMART CLASS ROOM (Floor 1 North Wing) • <strong>Events:</strong> Innopapers &
+          Project Presentation
+        </p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue / Central Foyer <span class="step-badge">Ground Floor</span></h4>
+              <p>Begin navigation at the central landmark (Saraswati Statue) right across the main registration desk.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Head to Southwest Staircase (Stair-SW) / Lift</h4>
+              <p>Turn left from the central foyer towards the Southwest stairwell / elevator lobby.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Climb Stairs Up to Floor 1 (F1) <span class="step-badge">Floor 1</span></h4>
+              <p>Walk up one flight of stairs to Floor 1 (F1) and enter through the main wing entrance.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Follow Corridor North towards North Wing</h4>
+              <p>Proceed straight through the corridor towards the North classroom wing.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              <h4>Proceed past M211 & M212</h4>
+              <p>Walk along the North corridor past M211 and M212.</p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-number">6</div>
+            <div class="step-text">
+              <h4>Arrive at M213 SMART CLASS ROOM <span class="step-badge">Destination</span></h4>
+              <p>Destination <strong>M213 Smart Class Room</strong> is right on your left.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h3>Floor 1 Interactive Map — M213 SMART CLASS ROOM</h3>
+          <p>View complete Floor 1 diagram with animated path from staircase straight to M213.</p>
+          <a href="one.html?venue=M213&drawPath=true" class="map-preview-btn">
+            🚀 Open Live Animated Path to M213 in Floor 1 Map →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Event Rules & Briefing Cards -->
+    <div class="guidelines-grid">
+      <div class="guide-card">
+        <h3>⚡ Claude Prompt Battle Brief</h3>
+        <ul>
+          <li><strong>Venue:</strong> Beta Lab (Floor 1).</li>
+          <li>System accounts & high-speed workstations provided.</li>
+          <li>Rounds include reasoning puzzles, few-shot prompting, and automated eval benchmarks.</li>
+          <li>Scoring is based on prompt precision, token efficiency, and response accuracy.</li>
+        </ul>
+      </div>
+
+      <div class="guide-card">
+        <h3>📄 Innopapers Presentation</h3>
+        <ul>
+          <li><strong>Venue:</strong> M213 Smart Class Room (Floor 1).</li>
+          <li>8 minutes presentation + 2 minutes judge Q&A.</li>
+          <li>Interactive Smart TV with HDMI and wireless casting.</li>
+          <li>Carry your PPT / PDF on a USB drive and keep 2 hard copies.</li>
+        </ul>
+      </div>
+
+      <div class="guide-card">
+        <h3>⏱️ Schedule & Timeline</h3>
+        <ul>
+          <li><strong>09:30 AM:</strong> Participant check-in & workstation allocation.</li>
+          <li><strong>10:00 AM:</strong> Round 1 of Claude Prompt Battle & Paper Session A.</li>
+          <li><strong>11:30 AM:</strong> Prompt Battle Knockouts & Paper Session B.</li>
+          <li><strong>01:00 PM:</strong> Final judge tally & prize distribution.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Department of Information Technology • Innopapers & Claude Prompt Battle Venue Roadmap</p>
+  </footer>
+
+  <!-- Mobile Floating Quick Action Dock -->
+  <div class="mobile-dock" id="mobileDock">
+    <a href="one.html?venue=BETA LAB&drawPath=true" id="dockMapBtn" class="dock-btn primary" title="View Animated Map">
+      <span class="dock-icon">🗺️</span>
+      <span id="dockMapText">Floor 1 Map</span>
+    </a>
+    <button class="dock-btn" id="dockSpeechBtn" onclick="toggleSpeech()" title="Listen Voice Directions">
+      <span class="dock-icon" id="dockAudioIcon">🔊</span>
+      <span id="dockAudioText">Audio Guide</span>
+    </button>
+    <button class="dock-btn" onclick="copyDirections()" title="Copy Directions Steps">
+      <span class="dock-icon">📋</span>
+      <span>Copy Steps</span>
+    </button>
+    <button class="dock-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top">
+      <span class="dock-icon">⬆️</span>
+      <span>Top</span>
+    </button>
+  </div>
+
+  <script>
+    let activeTabId = 'floor1-beta-tab';
+    let isSpeaking = false;
+
+    function filterMobileEvents(query) {
+      const q = query.trim().toLowerCase();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+
+      if (q) {
+        document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      }
+
+      const cards = document.querySelectorAll('.event-card');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const text = (card.getAttribute('data-tags') || '') + ' ' + card.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      const noRes = document.getElementById('noResultsMsg');
+      if (noRes) noRes.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    function clearMobileSearch() {
+      const input = document.getElementById('mobileSearch');
+      if (input) {
+        input.value = '';
+        filterMobileEvents('');
+      }
+      const firstChip = document.querySelector('.chip-btn');
+      if (firstChip) firstChip.classList.add('active');
+    }
+
+    function filterByChip(venue, btn) {
+      document.querySelectorAll('.chip-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const input = document.getElementById('mobileSearch');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) clearBtn.style.display = 'none';
+
+      const cards = document.querySelectorAll('.event-card');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const cardVenue = card.getAttribute('data-venue');
+        if (venue === 'all' || cardVenue === venue) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Update mobile dock map button
+      const dockMap = document.getElementById('dockMapBtn');
+      const dockText = document.getElementById('dockMapText');
+      if (dockMap && dockText) {
+        if (venue === 'm213') {
+          dockMap.href = 'one.html?venue=M213&drawPath=true';
+          dockText.innerText = 'Map: M213';
+        } else {
+          dockMap.href = 'one.html?venue=BETA LAB&drawPath=true';
+          dockText.innerText = 'Map: Beta Lab';
+        }
+      }
+
+      const noRes = document.getElementById('noResultsMsg');
+      if (noRes) noRes.style.display = (visibleCount === 0) ? 'block' : 'none';
+    }
+
+    function switchTab(tabId, btn) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      // Update dock map button to match active tab
+      const dockMap = document.getElementById('dockMapBtn');
+      const dockText = document.getElementById('dockMapText');
+      if (dockMap && dockText) {
+        if (tabId === 'floor1-m213-tab') {
+          dockMap.href = 'one.html?venue=M213&drawPath=true';
+          dockText.innerText = 'Map: M213';
+        } else {
+          dockMap.href = 'one.html?venue=BETA LAB&drawPath=true';
+          dockText.innerText = 'Map: Beta Lab';
+        }
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isSpeaking = false;
+      updateSpeechBtn(false);
+    }
+
+    function toggleSpeech() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this browser.");
+        return;
+      }
+
+      if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        isSpeaking = false;
+        updateSpeechBtn(false);
+        return;
+      }
+
+      let textToSpeak = "";
+      if (activeTabId === 'floor1-beta-tab') {
+        textToSpeak = "Roadmap to Floor 1, Beta Lab for Claude Prompt Battle, Web Architects, Poster Pitch, and Bug Hunt. " +
+          "Step 1: Start at Saraswati statue in the central foyer on Ground Floor. " +
+          "Step 2: Turn left and head to the southwest staircase. " +
+          "Step 3: Climb one flight of stairs to Floor 1. " +
+          "Step 4: Turn left immediately into the West lab corridor. " +
+          "Step 5: Walk straight past Alpha Lab. " +
+          "Step 6: Beta Lab is on your left between Alpha Lab and Gamma Lab. You have arrived!";
+      } else {
+        textToSpeak = "Roadmap to Floor 1, M213 Smart Class Room for Innopapers and Project Presentation. " +
+          "Step 1: Start at Saraswati statue in the central foyer on Ground Floor. " +
+          "Step 2: Turn left and head to the southwest staircase. " +
+          "Step 3: Climb one flight of stairs to Floor 1. " +
+          "Step 4: Follow the corridor north towards the north classroom wing. " +
+          "Step 5: Walk along the north corridor past M211 and M212. " +
+          "Step 6: Destination M213 Smart Class Room is right on your left. You have arrived!";
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.95;
+      utterance.lang = 'en-US';
+
+      utterance.onend = function () {
+        isSpeaking = false;
+        updateSpeechBtn(false);
+      };
+
+      utterance.onerror = function () {
+        isSpeaking = false;
+        updateSpeechBtn(false);
+      };
+
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+      isSpeaking = true;
+      updateSpeechBtn(true);
+    }
+
+    function updateSpeechBtn(speaking) {
+      const btn = document.getElementById('speakBtn');
+      if (btn) {
+        if (speaking) {
+          btn.classList.add('speaking');
+          btn.innerHTML = '<span>⏹️</span> Stop Audio';
+        } else {
+          btn.classList.remove('speaking');
+          btn.innerHTML = '<span id="speakerIcon">🔊</span> Listen Directions';
+        }
+      }
+
+      const dockIcon = document.getElementById('dockAudioIcon');
+      const dockText = document.getElementById('dockAudioText');
+      if (dockIcon && dockText) {
+        if (speaking) {
+          dockIcon.innerText = '⏹️';
+          dockText.innerText = 'Stop Audio';
+        } else {
+          dockIcon.innerText = '🔊';
+          dockText.innerText = 'Audio Guide';
+        }
+      }
+    }
+
+    function copyDirections() {
+      let directions = [];
+      if (activeTabId === 'floor1-beta-tab') {
+        directions = [
+          "Events: Claude Prompt Battle, Web Architects, Poster Pitch & Bug Hunt",
+          "Venue: BETA LAB (Floor 1)",
+          "----------------------------------------",
+          "1. Start at Saraswati statue (Ground Floor Central Foyer).",
+          "2. Turn left towards the Southwest staircase (Stair-SW).",
+          "3. Climb one flight of stairs to Floor 1 (F1).",
+          "4. Turn left immediately into the West lab corridor.",
+          "5. Walk straight past Alpha Lab.",
+          "6. Destination BETA LAB is on your left."
+        ];
+      } else {
+        directions = [
+          "Events: Innopapers & Project Presentation",
+          "Venue: M213 SMART CLASS ROOM (Floor 1)",
+          "Time: 10:00 AM - 1:00 PM",
+          "----------------------------------------",
+          "1. Start at Saraswati statue (Ground Floor Central Foyer).",
+          "2. Turn left towards the Southwest staircase (Stair-SW).",
+          "3. Climb one flight of stairs to Floor 1 (F1).",
+          "4. Follow the corridor north towards the north classroom wing.",
+          "5. Walk along the north corridor past M211 and M212.",
+          "6. Destination M213 SMART CLASS ROOM is on your left."
+        ];
+      }
+
+      navigator.clipboard.writeText(directions.join('\n')).then(() => {
+        alert("Directions copied to clipboard!");
+      }).catch(err => {
+        console.error("Clipboard copy failed: ", err);
+      });
+    }
+  </script>
+</body>
+
+</html>

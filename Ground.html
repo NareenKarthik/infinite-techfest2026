@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ground Floor — Registration → Event Navigation (Complete)</title>
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --panel: #ffffff;
+      --accent: #0b66d6;
+      --muted: #516273;
+      --path: #ff5252;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, Arial, Roboto, sans-serif;
+      background: var(--bg)
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: var(--panel);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+      position: sticky;
+      top: 0;
+      z-index: 20
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 16px
+    }
+
+    #controls {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    #app {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      min-height: calc(100vh - 64px)
+    }
+
+    #left {
+      flex: 1
+    }
+
+    #map-wrap {
+      background: var(--panel);
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 13px
+    }
+
+    svg {
+      width: 100%;
+      height: 85vh;
+      touch-action: none;
+      display: block;
+      cursor: grab;
+    }
+
+    .room {
+      fill: #dff4ff;
+      stroke: #1a4e7a;
+      stroke-width: 1.5;
+      cursor: pointer
+    }
+
+    .room.highlight {
+      stroke: #ff6b6b;
+      stroke-width: 3;
+      fill: #fff6f6
+    }
+
+    .corridor-line {
+      stroke: #bcd7ee;
+      stroke-width: 22;
+      fill: none;
+      stroke-linecap: round
+    }
+
+    #road {
+      stroke: #666;
+      stroke-width: 28;
+      stroke-linecap: round
+    }
+
+    #regGate {
+      fill: #ffd83a;
+      stroke: #8b6b00;
+      stroke-width: 2
+    }
+
+    #route {
+      fill: none;
+      stroke: var(--path);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    #routeOverlay {
+      fill: none;
+      stroke: transparent;
+      stroke-width: 12
+    }
+
+    button,
+    input,
+    select {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #d6dae0;
+      background: #fff;
+      font-size: 14px
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: #fff;
+      border: none
+    }
+
+    /* MODIFIED: Added styles for zoom buttons */
+    #controls button#zoomInBtn,
+    #controls button#zoomOutBtn {
+      width: 40px;
+      flex-shrink: 0;
+      font-weight: bold;
+    }
+
+    #controls #backBtn {
+      width: auto;
+      flex-shrink: 1;
+    }
+
+    /* --- START: NEW LEGEND STYLES --- */
+    #legend {
+      background: var(--panel);
+      padding: 8px 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 12px;
+    }
+
+    #legend ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap; /* Allows wrapping on small screens */
+      gap: 16px;
+    }
+
+    #legend li {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .legend-swatch {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      margin-right: 8px;
+      border: 1.5px solid #000;
+    }
+
+    /* Swatch Colors based on your request */
+    #swatch-mach {
+      background-color: #1e293b; /* Black / Dark slate fill */
+      border-color: #000000; /* Black stroke */
+    }
+
+    #swatch-office {
+      background-color: #dbeafe; /* Blue fill */
+      border-color: #2563eb; /* Blue stroke */
+    }
+
+    #swatch-prin {
+      background-color: #dcfce7; /* Green fill */
+      border-color: #16a34a; /* Green stroke */
+    }
+
+    #swatch-venue {
+      background-color: #fff6f6; /* Red highlight fill */
+      border-color: #ff6b6b; /* Red highlight stroke */
+    }
+    /* --- END: NEW LEGEND STYLES --- */
+
+    /* -----------------------------------------
+     * Responsive Media Query for Mobile
+     -----------------------------------------*/
+    @media (max-width: 650px) {
+      svg {
+        height: auto;
+      }
+
+      header {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      #controls {
+        margin-left: 0;
+        flex-wrap: wrap;
+      }
+
+      #app {
+        padding: 8px;
+        gap: 8px;
+      }
+
+      #map-wrap {
+        padding: 8px;
+      }
+
+      #controls button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Symposium Map — Ground Floor</h1>
+    <div id="controls">
+      <button id="backBtn" title="Go back">Back to Events</button>
+    </div>
+  </header>
+
+  <div id="legend">
+    <ul>
+      <li><span class="legend-swatch" id="swatch-mach"></span> Machine Lab (Black)</li>
+      <li><span class="legend-swatch" id="swatch-office"></span> Office (Blue)</li>
+      <li><span class="legend-swatch" id="swatch-prin"></span> Principal Room (Green)</li>
+      <li><span class="legend-swatch" id="swatch-venue"></span> Event Venue</li>
+    </ul>
+  </div>
+
+  <div id="app">
+    <div id="left">
+      <div id="map-wrap" class="panel" aria-label="Map area">
+        <svg id="svg" viewBox="-580 0 1600 1200" role="img" aria-label="Ground floor map">
+          <g id="viewport">
+            <title>Ground floor plan</title>
+            <rect id="MEL" class="room" x="700" y="1100" width="220" height="80" />
+            <text x="800" y="1150" font-size="12" text-anchor="middle">Mech labs</text>
+            <rect id="GROUND" class="room" x="50" y="1050" width="320" height="110" style="fill:#eafbf0;stroke:#10b981;stroke-width:2;" />
+            <text x="210" y="1105" font-size="16" text-anchor="middle" font-weight="bold" fill="#047857">College Play Ground</text>
+            <rect id="regGate" class="room" x="430" y="950" width="130" height="80" />
+            <text x="495" y="995" font-size="12" text-anchor="middle">Saraswati statue</text>
+            <polyline id="corridor" class="corridor-line" points="160,180 840,180 840,820 160,820 160,180" />
+            <polyline class="corridor-line" points="-80,120 160,120" />
+            <polyline class="corridor-line" points="-130,190 -130,230" />
+            <polyline class="corridor-line" points="15,570 15,820" />
+            <rect x="300" y="260" width="400" height="420" fill="#fbfdff" stroke="#eef3fb" rx="10" />
+            <!-- Central Circular Amphi Theatre in the middle of Ground Floor -->
+            <g id="central-amphi-wrap">
+              <circle cx="500" cy="450" r="130" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,4" />
+              <circle cx="500" cy="450" r="105" fill="#f0f7ff" stroke="#93c5fd" stroke-width="2" />
+              <circle cx="500" cy="450" r="80" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5" />
+              <circle cx="500" cy="450" r="50" fill="#bae6fd" stroke="#0284c7" stroke-width="1.5" />
+              <!-- Highlightable circle room for Central Amphi Theatre -->
+              <circle id="AMPHI" class="room" cx="500" cy="450" r="105" fill="rgba(224, 242, 254, 0.4)" stroke="#004aad" stroke-width="2.5" />
+              <text x="500" y="442" font-size="16" text-anchor="middle" font-weight="bold" fill="#00337a">Amphi Theatre</text>
+              <text x="500" y="464" font-size="11" text-anchor="middle" font-weight="600" fill="#0284c7">(Central Foyer)</text>
+            </g>
+            <text x="500" y="645" font-size="28" text-anchor="middle" fill="#94a3b8" font-weight="bold">Ground Floor</text>
+            <rect id="PH1" class="room" x="200" y="80" width="170" height="80" />
+            <text x="280" y="130" font-size="12" text-anchor="middle">Chemistry lab</text>
+            <rect id="PH2" class="room" x="400" y="80" width="200" height="80" />
+            <text x="480" y="130" font-size="12" text-anchor="middle">Lab-2</text>
+            <rect id="COE" class="room" x="630" y="80" width="170" height="80" />
+            <text x="710" y="130" font-size="12" text-anchor="middle">COE</text>
+            <rect id="LT01" class="room" x="860" y="245" width="100" height="90" />
+            <text x="910" y="300" font-size="15" text-anchor="middle">LH01</text>
+            <rect id="LT02" class="room" x="860" y="345" width="100" height="90" />
+            <text x="910" y="400" font-size="14" text-anchor="middle">LH02</text>
+            <rect id="LT03" class="room" x="860" y="445" width="100" height="90" />
+            <text x="910" y="495" font-size="14" text-anchor="middle" font-weight="bold">LH03</text>
+            <text x="910" y="510" font-size="9" text-anchor="middle" fill="#0891b2" font-weight="bold">Paper Presentation</text>
+            <rect id="LT04" class="room" x="860" y="545" width="100" height="90" />
+            <text x="910" y="595" font-size="14" text-anchor="middle" font-weight="bold">LH04</text>
+            <text x="910" y="610" font-size="9" text-anchor="middle" fill="#0891b2" font-weight="bold">Paper Presentation</text>
+            <rect id="LT05" class="room" x="860" y="645" width="100" height="90" />
+            <text x="910" y="690" font-size="13" text-anchor="middle" font-weight="bold">LH-5</text>
+            <text x="910" y="705" font-size="8.5" text-anchor="middle" fill="#4f46e5" font-weight="bold">Snap with AI</text>
+            <text x="910" y="718" font-size="7.5" text-anchor="middle" fill="#6366f1">(Poster Making)</text>
+            <!-- South entrance: Office (in Blue Colour) -->
+            <rect id="OFFICE" class="room" x="180" y="840" width="220" height="80" style="fill:#dbeafe;stroke:#2563eb;stroke-width:2.5;" />
+            <text x="290" y="875" font-size="14" text-anchor="middle" font-weight="bold" fill="#1d4ed8">Office</text>
+            <text x="290" y="895" font-size="11" text-anchor="middle" fill="#2563eb">(Admin / Office)</text>
+            <rect id="CDC" class="room" x="600" y="840" width="220" height="80" />
+            <text x="710" y="880" font-size="12" text-anchor="middle">Career Dev Cell (CDC)</text>
+            <!-- Northwest room: Principal Room (in Green Colour) -->
+            <rect id="PRIN" class="room" x="40" y="220" width="100" height="100" style="fill:#dcfce7;stroke:#16a34a;stroke-width:2.5;" />
+            <text x="90" y="265" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#15803d">Principal</text>
+            <text x="90" y="285" font-size="12.5" text-anchor="middle" font-weight="bold" fill="#15803d">Room</text>
+            <rect id="LIB" class="room" x="40" y="350" width="100" height="260" />
+            <text x="80" y="500" font-size="12" text-anchor="middle">Library</text>
+            <!-- West corridor: CH Room (regular room style) -->
+            <rect id="CH" class="room" x="40" y="640" width="100" height="120" />
+            <text x="90" y="700" font-size="13" text-anchor="middle" font-weight="bold">CH Room</text>
+            <rect id="stair-NW" x="90" y="80" width="50" height="80" fill="#e8f2ff" stroke="#7aa6ff" />
+            <text x="115" y="120" font-size="10" text-anchor="middle">Stair</text>
+            <rect id="stair-NE" x="860" y="80" width="50" height="80" fill="#e8f2ff" stroke="#7aa6ff" />
+            <text x="885" y="120" font-size="10" text-anchor="middle">Stair</text>
+            <rect class="room" x="860" y="200" width="40" height="40" />
+            <text x="880" y="220" font-size="11" text-anchor="middle">water</text>
+            <rect id="stair-SW" x="-10" y="850" width="50" height="80" fill="#e8f2ff" stroke="#7aa6ff" />
+            <text x="15" y="890" font-size="10" text-anchor="middle">Stair</text>
+            <rect class="room" x="-25" y="790" width="40" height="40" />
+            <text x="-5" y="810" font-size="11" text-anchor="middle">water</text>
+            <rect class="room" x="80" y="775" width="50" height="40" />
+            <text x="105" y="800" font-size="11" text-anchor="middle">Lift</text>
+            <rect id="stair-SE" x="900" y="850" width="50" height="80" fill="#e8f2ff" stroke="#7aa6ff" />
+            <text x="925" y="890" font-size="10" text-anchor="middle">Stair</text>
+            <rect class="room" x="860" y="765" width="40" height="40" />
+            <text x="880" y="790" font-size="11" text-anchor="middle">water</text>
+            <!-- Machine Lab in Black Colour (Shifted above EP labs as marked) -->
+            <rect id="MACH" class="room" x="-180" y="50" width="100" height="140" style="fill:#090d16;stroke:#000000;stroke-width:3.5;" />
+            <text x="-130" y="115" font-size="13" text-anchor="middle" font-weight="bold" fill="#ffffff">Machine Lab</text>
+            <text x="-130" y="138" font-size="10.5" text-anchor="middle" fill="#cbd5e1">(Machines Lab)</text>
+
+            <!-- EP Labs (remains as original) -->
+            <rect class="room" x="-180" y="230" width="100" height="350" id="EP_LAB" />
+            <text x="-130" y="420" font-size="14" text-anchor="middle">EP labs</text>
+
+            <rect id="OPEN_AUDITORIUM" class="room" x="-580" y="530" width="320" height="250" stroke="#eef3fb" />
+            <text x="-430" y="655" font-size="22" text-anchor="middle" font-weight="bold">Open Auditorium</text>
+            <rect class="room" x="-580" y="230" width="320" height="150" />
+            <text x="-440" y="320" font-size="20" text-anchor="middle">Cafeterita</text>
+
+            <!-- Canteen (aligned in west corridor) -->
+            <rect id="CANTEEN" class="room" x="-10" y="480" width="50" height="90" style="fill:#fffbeb;stroke:#f59e0b;stroke-width:2;" />
+            <text x="15" y="525" font-size="12" text-anchor="middle" font-weight="bold" fill="#b45309">Canteen</text>
+            <text x="15" y="545" font-size="9.5" text-anchor="middle" fill="#d97706">(Refresh)</text>
+            <rect id="REST_TOP" class="room" x="940" y="100" width="80" height="60"
+              style="fill:#ffefef;stroke:#e04ae0" />
+            <text x="980" y="135" font-size="11" text-anchor="middle">Girls Restroom</text>
+            <polyline id="route" points="" />
+            <polyline id="routeOverlay" points="" />
+          </g>
+        </svg>
+      </div>
+      <div>
+        <button id="zoomInBtn" title="Zoom In">+ Zoom in</button>
+        <button id="zoomOutBtn" title="Zoom Out">- Zoom out</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ... (Map data: REG, nodes, graph, POI_NODE, venueMap) ... */
+    const REG = { x: 500, y: 1015 };
+    const nodes = {
+      N_W: { x: 171, y: 191 }, N1: { x: 285, y: 191 }, N2: { x: 500, y: 191 }, N3: { x: 715, y: 191 }, N_E: { x: 829, y: 191 },
+      E1: { x: 829, y: 290 }, E2: { x: 829, y: 390 }, E3: { x: 829, y: 490 }, E4: { x: 829, y: 590 }, E5: { x: 829, y: 690 },
+      S_E: { x: 829, y: 809 },
+      S2: { x: 710, y: 809 },
+      S_MID: { x: 500, y: 809 },
+      S1: { x: 395, y: 809 },
+      S_W: { x: 290, y: 809 },
+      STAIR_SW: { x: -10, y: 809 },
+      W_S: { x: 171, y: 700 }, W1: { x: 171, y: 480 }, W2: { x: 171, y: 270 },
+      W_WORK: { x: -130, y: 360 },
+      MACH_NODE: { x: -130, y: 120 },
+      CANTEEN_NODE: { x: 15, y: 525 },
+      AMPHI_NODE: { x: 500, y: 450 },
+      OPEN_AUDI_NODE: { x: -430, y: 530 },
+      GROUND_NODE: { x: 210, y: 1050 }
+    };
+    const graph = {
+      'REG': ['S_MID', 'GROUND_NODE'], 'N_W': ['N1', 'W2', 'MACH_NODE'], 'N1': ['N_W', 'N2'], 'N2': ['N1', 'N3'], 'N3': ['N2', 'N_E'], 'N_E': ['N3', 'E1'],
+      'E1': ['N_E', 'E2'], 'E2': ['E1', 'E3'], 'E3': ['E2', 'E4'], 'E4': ['E3', 'E5'], 'E5': ['E4', 'S_E'],
+      'S_E': ['E5', 'S2'], 'S2': ['S_E', 'S_MID'], 'S_MID': ['S2', 'S1', 'REG', 'AMPHI_NODE'], 'S1': ['S_MID', 'S_W'],
+      'S_W': ['S1', 'W_S', 'STAIR_SW'],
+      'STAIR_SW': ['S_W', 'CANTEEN_NODE'],
+      'W_S': ['S_W', 'W1'], 'W1': ['W_S', 'W2', 'CANTEEN_NODE'], 'W2': ['W1', 'N_W', 'W_WORK'],
+      'CANTEEN_NODE': ['STAIR_SW', 'W1', 'W_WORK'],
+      'MACH_NODE': ['N_W', 'W_WORK'],
+      'W_WORK': ['MACH_NODE', 'CANTEEN_NODE', 'OPEN_AUDI_NODE', 'W2'],
+      'OPEN_AUDI_NODE': ['W_WORK'],
+      'AMPHI_NODE': ['S_MID'],
+      'GROUND_NODE': ['REG']
+    };
+    const POI_NODE = {
+      'CDC': 'S2', 'OFFICE': 'S_W', 'ADMIN': 'S_W', 'WEST_OFF': 'S_W', 'LT01': 'E1', 'LT02': 'E2', 'LT03': 'E3', 'LT04': 'E4', 'LT05': 'E5',
+      'PH2': 'N2', 'PH1': 'N1', 'COE': 'N3', 'REST_TOP': 'N_E', 'CH': 'W_S', 'LIB': 'W1', 'PRIN': 'W2', 'EP_LAB': 'W_WORK', 'MACH': 'MACH_NODE',
+      'MEL': 'S_E', 'AMPHI': 'AMPHI_NODE', 'CENTRAL_AMPHI': 'AMPHI_NODE', 'OPEN_AUDITORIUM': 'OPEN_AUDI_NODE', 'OPEN_AUDI': 'OPEN_AUDI_NODE', 'GROUND': 'GROUND_NODE',
+      'CANTEEN': 'CANTEEN_NODE'
+    };
+    const venueMap = {
+      'LH01': 'LT01', 'LH02': 'LT02', 'LH 03': 'LT03', 'LH03': 'LT03', 'LH-03': 'LT03',
+      'LH04': 'LT04', 'LH-04': 'LT04', 'AI PAPER': 'LT04', 'AI&DS PAPER': 'LT04', 'AI&DS PAPER PRESENTATION': 'LT04',
+      'LH05': 'LT05', 'LH 05': 'LT05', 'LH-05': 'LT05', 'LH-5': 'LT05', 'LH 5': 'LT05', 'LH5': 'LT05',
+      'SNAP WITH AI': 'LT05', 'SNAP WITH AI (POSTER MAKING)': 'LT05', 'POSTER MAKING': 'LT05', 'SNAP WITH AI(POSTER MAKING)': 'LT05',
+      'AI PROMPT BATTLE': 'LT05', 'PROMPT BATTLE': 'LT05',
+      'MACHINES LAB': 'MACH', 'MACHINE LAB': 'MACH', 'MACH': 'MACH', 'MEL': 'MEL',
+      'EP LABS': 'EP_LAB', 'EP LAB': 'EP_LAB',
+      'PRINCIPAL ROOM': 'PRIN', 'PRINCIPLE ROOM': 'PRIN', 'PRINCIPAL OFFICE': 'PRIN', 'PRIN': 'PRIN',
+      'OFFICE': 'OFFICE', 'ADMIN OFFICE': 'OFFICE', 'MAIN OFFICE': 'OFFICE', 'ADMIN': 'OFFICE', 'WEST_OFF': 'OFFICE',
+      'CH ROOM': 'CH', 'CH': 'CH',
+      'AMPHI': 'AMPHI', 'AMPHI THEATRE': 'AMPHI', 'AMPHITHEATRE': 'AMPHI', 'CENTRAL AMPHI': 'AMPHI',
+      'OPEN AUDITORIUM': 'OPEN_AUDITORIUM', 'OPEN AUDI': 'OPEN_AUDITORIUM', 'OPENAUDITORIUM': 'OPEN_AUDITORIUM',
+      'PLAY GROUND': 'GROUND', 'PLAYGROUND': 'GROUND', 'GROUND': 'GROUND',
+      'CANTEEN': 'CANTEEN', 'CANTEEN ROOM': 'CANTEEN', 'CAFETERIA': 'CANTEEN'
+    };
+
+    /* DOM refs */
+    const route = document.getElementById('route');
+    const routeOverlay = document.getElementById('routeOverlay');
+    const backBtn = document.getElementById('backBtn');
+
+    // FIXED: Moved refs for zoom buttons
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+    // --- START: MODIFIED ZOOM/PAN CODE ---
+    const svg = document.getElementById('svg');
+    const viewport = document.getElementById('viewport');
+
+    let state = { tx: 0, ty: 0, scale: 1, dragging: false, lastX: 0, lastY: 0 };
+    function applyTransform() {
+      viewport.setAttribute('transform', `translate(${state.tx} ${state.ty}) scale(${state.scale})`);
+    }
+    applyTransform(); // Set initial transform
+
+    function zoom(delta) {
+      state.scale = Math.min(3, Math.max(0.4, state.scale * delta));
+      applyTransform();
+    }
+
+    svg.addEventListener('pointerdown', (e) => {
+      svg.setPointerCapture(e.pointerId);
+      state.dragging = true;
+      state.lastX = e.clientX;
+      state.lastY = e.clientY;
+      svg.style.cursor = 'grabbing';
+    });
+    svg.addEventListener('pointermove', (e) => {
+      if (!state.dragging) return;
+      const dx = e.clientX - state.lastX, dy = e.clientY - state.lastY;
+      state.lastX = e.clientX; state.lastY = e.clientY;
+      state.tx += dx;
+      state.ty += dy;
+      applyTransform();
+    });
+    svg.addEventListener('pointerup', (e) => {
+      state.dragging = false;
+      try { svg.releasePointerCapture(e.pointerId); } catch (e) { }
+      svg.style.cursor = 'grab';
+    });
+    svg.addEventListener('pointerleave', () => {
+      state.dragging = false;
+      svg.style.cursor = 'grab';
+    });
+    svg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const delta = -e.deltaY * 0.0015;
+      zoom(1 + delta);
+    }, { passive: false });
+
+    // MODIFIED: Added button click listeners
+    zoomInBtn.addEventListener('click', () => zoom(1.2));
+    zoomOutBtn.addEventListener('click', () => zoom(1 / 1.2));
+    // --- END: MODIFIED ZOOM/PAN CODE ---
+
+    /* ... (Helper functions: nodePos, findPath, pathToPoints) ... */
+    function nodePos(k) { return (k === 'REG') ? REG : nodes[k]; }
+    function findPath(start, end) {
+      if (start === end) return [start];
+      const q = [start], prev = { [start]: null };
+      while (q.length) {
+        const cur = q.shift();
+        const neighbors = graph[cur] || [];
+        for (const nb of neighbors) {
+          if (prev[nb] !== undefined) continue;
+          prev[nb] = cur; q.push(nb);
+          if (nb === end) {
+            const out = [nb]; let p = cur;
+            while (p !== null) { out.unshift(p); p = prev[p]; }
+            return out;
+          }
+        }
+      }
+      return null;
+    }
+    function pathToPoints(seq) { return seq.map(k => { const p = (k === 'REG') ? REG : nodes[k]; return `${p.x} ${p.y}`; }).join(' '); }
+
+
+    /* ... (setRouteTo function) ... */
+    function setRouteTo(destKey, drawLine = false) {
+      route.setAttribute('points', '');
+      document.querySelectorAll('.room.highlight').forEach(el => el.classList.remove('highlight'));
+      if (!POI_NODE[destKey]) {
+        console.warn('Unknown destination key:', destKey);
+        return false;
+      }
+      const nodeKey = POI_NODE[destKey];
+      const startNode = 'REG';
+      const seq = findPath(startNode, nodeKey);
+      if (!seq) {
+        console.warn('No path found from', startNode, 'to', nodeKey);
+        return false;
+      }
+      if (drawLine) {
+        const pts = pathToPoints(seq);
+        route.setAttribute('points', pts);
+        routeOverlay.setAttribute('points', pts);
+      }
+      const destEl = document.getElementById(destKey);
+      if (destEl) {
+        destEl.classList.add('highlight');
+      }
+      return true;
+    }
+
+    /* room click sets destination */
+    document.querySelectorAll('.room').forEach(el => {
+      el.addEventListener('click', () => {
+        const id = el.id;
+        if (POI_NODE[id]) {
+          setRouteTo(id, false);
+        }
+      });
+    });
+
+    // Back button listener
+    backBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    /* ... (initializeMap function) ... */
+    function initializeMap() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const venue = urlParams.get('venue');
+      const drawPath = urlParams.get('drawPath');
+      if (!venue) return;
+      let destKey = venue.trim().toUpperCase();
+      if (venueMap[destKey]) {
+        destKey = venueMap[destKey];
+      }
+      if (POI_NODE[destKey]) {
+        setRouteTo(destKey, drawPath === 'true');
+      } else {
+        console.warn('Could not find POI for venue:', venue);
+      }
+    }
+
+    /* initial call on page load */
+    initializeMap();
+
+  </script>
+</body>
+
+</html>

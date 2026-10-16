@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="rpsit.png">
+  <title>Science & Humanities — Event Venue Roadmap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #00337a;
+      --primary-light: #e3f2fd;
+      --accent: #ff5252;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --bg: #f4f7fc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #004aad 0%, #002b66 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 74, 173, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Venue Summary Banner */
+    .summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-left: 6px solid var(--primary);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 15px;
+    }
+
+    .stat-box {
+      background: var(--primary-light);
+      padding: 14px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      background: white;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-info p {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Event Cards Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 74, 173, 0.15);
+      border-color: var(--primary);
+    }
+
+    .event-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .badge-floor3 {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .badge-floor4 {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .event-card h3 {
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .event-venue {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .event-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .event-btn-action {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.25s;
+      display: block;
+    }
+
+    .event-btn-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Roadmap Section */
+    .roadmap-section {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      border-left: 5px solid var(--primary);
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.25s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Step-by-Step Wayfinding Flow */
+    .route-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+      position: relative;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #edf2f7;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-text h4 {
+      font-size: 14px;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .audio-speech-btn {
+      background: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      transition: background 0.25s;
+    }
+
+    .audio-speech-btn:hover {
+      background: #00337a;
+    }
+
+    /* Interactive Visual Roadmap Blueprint */
+    .visual-map-container {
+      background: #eef4fb;
+      border: 2px solid #bcd7ee;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .map-preview-btn {
+      display: inline-block;
+      margin-top: 14px;
+      background: #004aad;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0, 74, 173, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .map-preview-btn:hover {
+      background: #00337a;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title">
+        <h1>Science & Humanities — Event Venue Roadmap</h1>
+        <p>Technical Symposium 2K25/2026 • RP Sarathy Institute of Technology</p>
+      </div>
+      <a href="index.html" class="back-btn">← Back to All Departments</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Summary Box -->
+    <div class="summary-card">
+      <h2>S&H Tech Events Overview</h2>
+      <p style="color: var(--muted); margin-top: 4px;">Smart TV equipped classrooms allocated for high-tech presentations, live judging, and interactive puzzles.</p>
+      <div class="summary-grid">
+        <div class="stat-box">
+          <div class="stat-icon">🏛️</div>
+          <div class="stat-info">
+            <h4>Starting Point</h4>
+            <p>Saraswati Statue (Ground Floor)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🏢</div>
+          <div class="stat-info">
+            <h4>Floor 3 Venue</h4>
+            <p>DH2 (Maths Puzzles)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">📺</div>
+          <div class="stat-info">
+            <h4>Floor 4 Venues</h4>
+            <p>M413, M414, M415 (Smart TV)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🛗</div>
+          <div class="stat-info">
+            <h4>Accessibility</h4>
+            <p>Stairs-SW & Elevator Available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 4 Events Cards -->
+    <div class="events-grid">
+      <!-- 1) Maths Puzzles -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor3">Floor 3</span>
+          <h3>1) Maths Puzzles</h3>
+          <div class="event-venue">📍 DH2 SMART TV CLASS ROOM</div>
+          <p>Analytical challenges and mathematical logic testing hosted in Drawing Hall 2 (Smart TV classroom).</p>
+        </div>
+        <a href="three.html?venue=DH2&drawPath=true" class="event-btn-action">View Floor 3 Map & Route →</a>
+      </div>
+
+      <!-- 2) Extempore Speech -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor4">Floor 4</span>
+          <h3>2) Extempore Speech</h3>
+          <div class="event-venue">📍 M414 SMART TV CLASS ROOM</div>
+          <p>Instantaneous spontaneous speech & technical talk in Smart TV Classroom M414 (Main Block, 4th Floor).</p>
+        </div>
+        <a href="four.html?venue=M414&drawPath=true" class="event-btn-action">View Floor 4 Map & Route →</a>
+      </div>
+
+      <!-- 3) Paper Presentation -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor4">Floor 4</span>
+          <h3>3) Paper Presentation</h3>
+          <div class="event-venue">📍 M415 SMART TV CLASS ROOM</div>
+          <p>Technical research paper presentations equipped with multimedia Smart TV display in Room M415.</p>
+        </div>
+        <a href="four.html?venue=M415&drawPath=true" class="event-btn-action">View Floor 4 Map & Route →</a>
+      </div>
+
+      <!-- 4) Poster Presentations -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor4">Floor 4</span>
+          <h3>4) Poster Presentations</h3>
+          <div class="event-venue">📍 M413 SMART TV CLASS ROOM</div>
+          <p>Visual and conceptual tech posters display and interactive jury evaluation in Room M413.</p>
+        </div>
+        <a href="four.html?venue=M413&drawPath=true" class="event-btn-action">View Floor 4 Map & Route →</a>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Wayfinding Roadmap -->
+    <div class="roadmap-section">
+      <div class="section-title">
+        <span>Turn-by-Turn Wayfinding Roadmap</span>
+        <button id="speakAllBtn" class="audio-speech-btn" onclick="speakActiveDirections()">🔊 Listen to Audio Directions</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('floor3-tab', this)">Floor 3 Venue: DH2 (Maths Puzzles)</button>
+        <button class="tab-btn" onclick="switchTab('floor4-tab', this)">Floor 4 Venues: M413, M414, M415</button>
+      </div>
+
+      <!-- Tab 1: Floor 3 Roadmap -->
+      <div id="floor3-tab" class="tab-content active">
+        <div class="route-steps" id="f3-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Assembly at Saraswati Statue (Ground Floor)</h4>
+              <p>All participants assemble at the central Saraswati Statue foyer right past the main registration gate.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Head Left to Staircase (Stair-SW / Lift)</h4>
+              <p>Turn left and take the main southern staircase (Stair-SW) or the adjacent elevator.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Climb to Floor 3</h4>
+              <p>Ascend past Floor 1 and Floor 2, and step out onto Floor 3.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Follow the West Corridor to North Wing</h4>
+              <p>Walk straight along the corridor, turn right at the corner towards the North Drawing Hall wing.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              <h4>Arrive at DH2 SMART TV CLASS ROOM</h4>
+              <p>Walk past the Staff Room and DH1. Destination DH2 (Drawing Hall 2) is on your right. You have arrived!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 3 Interactive Route Path</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Stair-SW along the corridor to DH2 Smart TV Classroom</p>
+          <a href="three.html?venue=DH2&drawPath=true" class="map-preview-btn">🚀 Open Live Animated Path in Floor 3 Map</a>
+        </div>
+      </div>
+
+      <!-- Tab 2: Floor 4 Roadmap -->
+      <div id="floor4-tab" class="tab-content">
+        <div class="route-steps" id="f4-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Begin navigation at the central statue foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Ascend via Stair-SW or Elevator</h4>
+              <p>Turn left and take the main southwest stairwell or elevator directly to Floor 4.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Exit onto Floor 4 (Main Block)</h4>
+              <p>Step out into the south corridor near the Seminar Hall.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>Proceed Straight Past M422 towards East Wing</h4>
+              <p>Walk along the southern corridor and turn left into the East Smart TV Classroom Wing.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">5</div>
+            <div class="step-text">
+              <h4>Locate Rooms M413, M414, and M415</h4>
+              <p>As you proceed along the corridor on your right:
+                <br>• <strong>M415</strong>: Paper Presentation (Smart TV Classroom)
+                <br>• <strong>M414</strong>: Extempore Speech (Smart TV Classroom)
+                <br>• <strong>M413</strong>: Poster Presentations (Smart TV Classroom)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 4 Interactive Route Path</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Stair-SW to Smart TV Classrooms M413, M414, and M415</p>
+          <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+            <a href="four.html?venue=M413&drawPath=true" class="map-preview-btn">🚀 Open Path to M413 (Posters)</a>
+            <a href="four.html?venue=M414&drawPath=true" class="map-preview-btn">🚀 Open Path to M414 (Extempore)</a>
+            <a href="four.html?venue=M415&drawPath=true" class="map-preview-btn">🚀 Open Path to M415 (Paper)</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>A National Level Technical Symposium — Infinite TechFest • S&H Department Event Venue Guide</p>
+  </footer>
+
+  <script>
+    let activeTabId = 'floor3-tab';
+
+    function switchTab(tabId, btn) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakActiveDirections() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this device/browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      let textToSpeak = "";
+      if (activeTabId === 'floor3-tab') {
+        textToSpeak = "Roadmap to Floor 3, DH2 Smart TV Classroom for Maths Puzzles. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Turn left and take Staircase southwest or the lift. " +
+          "Step 3: Climb to Floor 3. " +
+          "Step 4: Walk along the corridor to the North drawing hall wing. " +
+          "Step 5: Your destination, DH2 Smart TV Classroom, is on your right. You have arrived!";
+      } else {
+        textToSpeak = "Roadmap to Floor 4 Smart TV Classrooms M413, M414, and M415. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Turn left and take Staircase southwest or the elevator directly to Floor 4. " +
+          "Step 3: Exit onto Floor 4 into the south corridor. " +
+          "Step 4: Walk along the corridor and turn left into the East Smart TV Classrooms wing. " +
+          "Step 5: On your right, you will find M415 for Paper Presentation, M414 for Extempore Speech, and M413 for Poster Presentations. You have arrived!";
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.95;
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>

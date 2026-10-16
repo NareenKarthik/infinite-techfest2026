@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="rpsit.png">
+  <title>Mechanical Engineering — Event Venue Roadmap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #004aad;
+      --primary-dark: #00337a;
+      --primary-light: #e3f2fd;
+      --mech-color: #ea580c;
+      --accent: #ff5252;
+      --success: #10b981;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #7c2d12 0%, #004aad 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0, 74, 173, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1050px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Venue Summary Banner */
+    .summary-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border-left: 6px solid var(--mech-color);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .stat-box {
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      background: #ffedd5;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mech-color);
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .stat-info p {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Events Grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .event-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 22px rgba(0, 74, 173, 0.15);
+      border-color: var(--mech-color);
+    }
+
+    .event-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .badge-floor2 {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .badge-ground {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .event-card h3 {
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .event-venue {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .event-card p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .event-btn-action {
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.25s;
+      display: block;
+    }
+
+    .event-btn-action:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Roadmap Section */
+    .roadmap-section {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      border-left: 5px solid var(--mech-color);
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.25s;
+    }
+
+    .tab-btn.active {
+      background: #004aad;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Steps */
+    .route-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid #edf2f7;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #004aad;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-text h4 {
+      font-size: 14px;
+      color: #1e293b;
+      margin-bottom: 2px;
+    }
+
+    .step-text p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .audio-speech-btn {
+      background: #004aad;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      transition: background 0.25s;
+    }
+
+    .audio-speech-btn:hover {
+      background: #00337a;
+    }
+
+    .visual-map-container {
+      background: #eef4fb;
+      border: 2px solid #bcd7ee;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .map-preview-btn {
+      display: inline-block;
+      margin: 6px 4px;
+      background: #004aad;
+      color: white;
+      text-decoration: none;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 4px 10px rgba(0, 74, 173, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .map-preview-btn:hover {
+      background: #00337a;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-title">
+        <h1>⚙️ Mechanical Engineering — Event Venue Roadmap</h1>
+        <p>Department of Mechanical Engineering • Infinite TechFest</p>
+      </div>
+      <a href="index.html" class="back-btn">← Back to All Departments</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Overview Banner -->
+    <div class="summary-card">
+      <h2>Department of Mechanical Engineering</h2>
+      <p style="color: var(--muted); margin-top: 4px;">Six technical competitions featuring design paper presentations, intensive CAD & engineering hackathons, project displays, brain teasers, and aerodynamic water rocket launches.</p>
+      
+      <div class="summary-grid">
+        <div class="stat-box">
+          <div class="stat-icon">🏛️</div>
+          <div class="stat-info">
+            <h4>Start Location</h4>
+            <p>Saraswati Statue (Ground Floor)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🚀</div>
+          <div class="stat-info">
+            <h4>Outdoor Arena</h4>
+            <p>College Play Ground (Aqua Rocket)</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🛠️</div>
+          <div class="stat-info">
+            <h4>Floor 2 Hub</h4>
+            <p>ROOM214, LH20, LH 21</p>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">🛗</div>
+          <div class="stat-info">
+            <h4>Vertical Access</h4>
+            <p>Stairs-SW & Lift</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 6 Mechanical Events -->
+    <div class="events-grid">
+      <!-- 1) Paper Presentation -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>1) Paper Presentation</h3>
+          <div class="event-venue">📍 ROOM214</div>
+          <p>Research presentations covering Thermal Engineering, Advanced Materials, Robotics, CFD, and Additive Manufacturing.</p>
+        </div>
+        <a href="two.html?venue=ROOM214&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 2) MECH HACK X -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>2) MECH HACK X</h3>
+          <div class="event-venue">📍 ROOM214</div>
+          <p>Rapid mechanical product design hackathon solving real industrial challenges using CAD, mechanisms, and simulations.</p>
+        </div>
+        <a href="two.html?venue=ROOM214&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 3) PROJECT XPLORE -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>3) PROJECT XPLORE</h3>
+          <div class="event-venue">📍 MECH LH20 (LH-20)</div>
+          <p>Exhibition of working mechanical models, automation rigs, EVs, renewable energy prototypes, and mechanism demos.</p>
+        </div>
+        <a href="two.html?venue=MECH LH20&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 4) POSTER PRO -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>4) POSTER PRO</h3>
+          <div class="event-venue">📍 MECH LH 21 (LH-21)</div>
+          <p>Technical poster contest displaying engineering design concepts, green manufacturing, and sustainable engineering.</p>
+        </div>
+        <a href="two.html?venue=MECH LH 21&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 5) QUIZ- BRAIN BOLT -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-floor2">Floor 2</span>
+          <h3>5) QUIZ - BRAIN BOLT</h3>
+          <div class="event-venue">📍 LH20</div>
+          <p>Fast-paced technical buzzer quiz covering mechanics, thermodynamics, fluid dynamics, automobile, and general science.</p>
+        </div>
+        <a href="two.html?venue=LH20&drawPath=true" class="event-btn-action">View Floor 2 Map & Route →</a>
+      </div>
+
+      <!-- 6) AQUA ROCKET -->
+      <div class="event-card">
+        <div>
+          <span class="event-badge badge-ground">Ground Floor</span>
+          <h3>6) AQUA ROCKET</h3>
+          <div class="event-venue">📍 PLAY GROUND</div>
+          <p>Aerodynamic water pressure rocket launch competition tested for maximum flight range, trajectory, and recovery.</p>
+        </div>
+        <a href="Ground.html?venue=PLAY GROUND&drawPath=true" class="event-btn-action">View Play Ground Map & Route →</a>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Wayfinding Section -->
+    <div class="roadmap-section">
+      <div class="section-title">
+        <span>Turn-by-Turn Wayfinding Roadmap</span>
+        <button id="speakAllBtn" class="audio-speech-btn" onclick="speakActiveDirections()">🔊 Listen to Audio Directions</button>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('mech-floor2-tab', this)">Floor 2 Hub: ROOM214, MECH LH20 & MECH LH 21</button>
+        <button class="tab-btn" onclick="switchTab('mech-ground-tab', this)">Outdoor Arena: AQUA ROCKET (Play Ground)</button>
+      </div>
+
+      <!-- Tab 1: Floor 2 Hub -->
+      <div id="mech-floor2-tab" class="tab-content active">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Floor 2 Venues:</strong> ROOM214 (Paper & Mech Hack X), MECH LH20 (Project Xplore & Quiz), and MECH LH 21 (Poster Pro).</p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Assemble at the central entrance foyer.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Take Staircase-SW or Elevator up to Floor 2</h4>
+              <p>Turn left and climb two flights of stairs (past Floor 1) to Floor 2.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>For ROOM214 (Paper Presentation & Mech Hack X)</h4>
+              <p>Turn right into the corridor, proceed towards the East classroom wing, and turn left. <strong>ROOM 214</strong> is on your right.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-text">
+              <h4>For MECH LH20 & MECH LH 21</h4>
+              <p>Proceed straight through the southern corridor past the Staff Room:
+                <br>• <strong>MECH LH 21</strong>: POSTER PRO (Hall on your right)
+                <br>• <strong>MECH LH20</strong>: PROJECT XPLORE & BRAIN BOLT QUIZ (Hall on your right)
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Floor 2 Interactive Map — Mechanical Venues</h4>
+          <p style="font-size: 13px; color: var(--muted);">Select a venue to open live path from stairs:</p>
+          <a href="two.html?venue=ROOM214&drawPath=true" class="map-preview-btn">🚀 Route to ROOM214 (Paper & Hackathon)</a>
+          <a href="two.html?venue=MECH LH20&drawPath=true" class="map-preview-btn">🚀 Route to MECH LH20 (Project & Quiz)</a>
+          <a href="two.html?venue=MECH LH 21&drawPath=true" class="map-preview-btn">🚀 Route to MECH LH 21 (Poster Pro)</a>
+        </div>
+      </div>
+
+      <!-- Tab 2: Ground Floor Arena (Play Ground) -->
+      <div id="mech-ground-tab" class="tab-content">
+        <p style="color: var(--muted); margin-bottom: 12px;"><strong>Outdoor Sports Field:</strong> AQUA ROCKET Launch and Recovery Arena.</p>
+
+        <div class="route-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h4>Start at Saraswati Statue (Ground Floor)</h4>
+              <p>Begin navigation at the main registration gate / Saraswati statue.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h4>Head Directly South towards Campus Grounds</h4>
+              <p>Walk out through the southern exit gate towards the college sports grounds.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h4>Arrive at College Play Ground (Launch Arena)</h4>
+              <p>The outdoor rocket launching zone, launch pads, and measurement range are clearly marked on the open field.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-map-container">
+          <h4 style="color: var(--primary); margin-bottom: 8px;">Ground Floor Map — College Play Ground</h4>
+          <p style="font-size: 13px; color: var(--muted);">Direct path from Registration Gate & Statue to the College Play Ground</p>
+          <a href="Ground.html?venue=PLAY GROUND&drawPath=true" class="map-preview-btn">🚀 Open Live Animated Path to Play Ground</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <p>A National Level Technical Symposium — Infinite TechFest • Department of Mechanical Engineering Venue Guide</p>
+  </footer>
+
+  <script>
+    let activeTabId = 'mech-floor2-tab';
+
+    function switchTab(tabId, btn) {
+      activeTabId = tabId;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakActiveDirections() {
+      if (!('speechSynthesis' in window)) {
+        alert("Speech synthesis is not supported on this device/browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      let textToSpeak = "";
+      if (activeTabId === 'mech-floor2-tab') {
+        textToSpeak = "Roadmap to Floor 2 venues for Mechanical Engineering. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Turn left and take Staircase southwest or the elevator up to Floor 2. " +
+          "Step 3: For Room 214, proceed to the East classroom wing. Destination is on your right. " +
+          "Step 4: For MECH LH 20 and MECH LH 21, proceed straight through the south corridor. Destinations are on your right. You have arrived!";
+      } else {
+        textToSpeak = "Roadmap to College Play Ground for Aqua Rocket. " +
+          "Step 1: Start at Saraswati statue on Ground Floor. " +
+          "Step 2: Head south out to the open campus grounds. " +
+          "Step 3: Arrive at the College Play Ground launch arena on the field. You have arrived!";
+      }
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.95;
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
