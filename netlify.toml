@@ -1,9 +1,2 @@
 [build]
   publish = "."
-
-[[redirects]]
-  from = "/"
-  to = "/Ground.html"
-  status = 302
-  force = true
-
